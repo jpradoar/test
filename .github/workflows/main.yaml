@@ -1,0 +1,51 @@
+name: main-test
+on:
+  push:
+    branches:
+      - main
+
+env:
+  VULN_SEVERITY: 'CRITICAL'
+  
+jobs:
+  Build-Docker-image:
+    runs-on: ubuntu-latest 
+    
+    steps:
+     
+    - name: Checkout
+      uses: actions/checkout@v3
+
+        
+    - name: Run Trivy vulnerability scanner
+      id: vulnscan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'domoticz/domoticz:latest'
+        hide-progress: true
+        format: 'table'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: ${{ env.VULN_SEVERITY }}
+        #exit-code: '1'              
+
+    - uses: actions/github-script@v6
+      #if: github.event_name == 'pull_request'
+      #env:
+      #  PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
+        script: |
+          <details><summary>vulnerability scanner</summary>
+    
+          \`\`\`\n
+          ${{ steps.vulnscan.outputs.stdout }}
+          \`\`\`
+          
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })

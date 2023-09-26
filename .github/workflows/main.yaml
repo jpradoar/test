@@ -2,6 +2,7 @@ name: main-test
 on:
   push:
     branches:
+      - test-msg
       - main
 
 env:

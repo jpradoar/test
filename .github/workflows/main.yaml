@@ -30,13 +30,10 @@ jobs:
         #exit-code: '1'              
 
     - uses: actions/github-script@v6
-      #if: github.event_name == 'pull_request'
-      #env:
-      #  PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
         script: |
-          <details><summary>vulnerability scanner</summary>
+          <summary>vulnerability scanner</summary>
     
           \`\`\`\n
           ${{ steps.vulnscan.outputs.stdout }}

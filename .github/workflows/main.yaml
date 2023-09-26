@@ -33,6 +33,16 @@ jobs:
 
     - uses: actions/github-script@v6
       with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '👋 zxc Thanks for reporting!'
+          })
+
+    - uses: actions/github-script@v6
+      with:
         github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
         script: |
           github.rest.issues.createComment({

@@ -33,9 +33,11 @@ jobs:
       with:
         github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
         script: |
+          const output = `${{ steps.validate.outputs.stdout }}`
+        
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '👋 Thanks for reporting!'
+            body: output
           })

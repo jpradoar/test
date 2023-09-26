@@ -29,12 +29,34 @@ jobs:
         severity: ${{ env.VULN_SEVERITY }}
         #exit-code: '1'              
 
+
+
     - uses: actions/github-script@v6
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
         script: |
-          const output = `${{ steps.validate.outputs.stdout }}`
-        
+          const output = `#### test 🖌\`${{ steps.validate.outputs.stdout }}\`
+          <details><summary>test</summary>
+    
+          \`\`\`\n
+          ${{ steps.validate.outputs.stdout }}
+          \`\`\`
+    
+          </details>
+    
+          <details><summary>test 2</summary>
+    
+          \`\`\`\n
+          ${{ steps.validate.outputs.stdout }}
+          \`\`\`
+    
+          </details>
+    
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+    
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,

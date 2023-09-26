@@ -31,23 +31,40 @@ jobs:
         #exit-code: '1'              
 
 
-    - uses: actions/github-script@v6
-      with:
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: '👋 zxc Thanks for reporting!'
-          })
+
 
     - uses: actions/github-script@v6
+      env:
+        PLAN: "${{ steps.vulnscan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
         script: |
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.vulnscan.outcome }}\`
+          #### vulnscan Initialization ⚙️\`${{ steps.vulnscan.outcome }}\`
+          #### vulnscan Validation 🤖\`${{ steps.vulnscan.outcome }}\`
+          <details><summary>Validation Output</summary>
+    
+          \`\`\`\n
+          ${{ steps.vulnscan.outputs.stdout }}
+          \`\`\`
+    
+          </details>
+    
+          #### vulnscan Plan 📖\`${{ steps.vulnscan.outcome }}\`
+    
+          <details><summary>Show Plan</summary>
+    
+          \`\`\`\n
+          ${process.env.PLAN}
+          \`\`\`
+    
+          </details>
+    
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+    
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '👋 Thanks for reporting!'
+            body: output
           })

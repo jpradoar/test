@@ -27,83 +27,18 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: 'domoticz/domoticz:latest'
-        hide-progress: true
+        #hide-progress: true
         format: 'table'
-        ignore-unfixed: true
+        #ignore-unfixed: true
         vuln-type: 'os,library'
         #vuln-type: 'os,library'
         severity: ${{ env.VULN_SEVERITY }}
         #exit-code: '1' 
-        output: 'table.md'
+        output: 'table.txt'
         
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
         message: 'AutoCommit: Add table file'
-        add: 'table.md'
+        add: 'table.txt'
 
-
-    - name: Run Trivy vulnerability scanner
-      id: vulnscan2
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'domoticz/domoticz:latest'
-        hide-progress: true
-        format: 'github'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        #vuln-type: 'os,library'
-        severity: ${{ env.VULN_SEVERITY }}
-        #exit-code: '1' 
-        output: 'github.md'
-        
-    # ...and then use the action as you would normally do, but providing the path to the repo
-    - uses: EndBug/add-and-commit@v9
-      with:
-        message: 'AutoCommit: Add github file'
-        add: 'github.md'
-
-
-    - name: Run Trivy vulnerability scanner
-      id: vulnscan3
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'domoticz/domoticz:latest'
-        hide-progress: true
-        format: 'sarif'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        #vuln-type: 'os,library'
-        severity: ${{ env.VULN_SEVERITY }}
-        #exit-code: '1' 
-        output: 'sarif.sarif'
-        
-    # ...and then use the action as you would normally do, but providing the path to the repo
-    - uses: EndBug/add-and-commit@v9
-      with:
-        message: 'AutoCommit: Add sarif file '
-        add: 'sarif.sarif'
-
-
-
-
-
-    - name: Run Trivy vulnerability scanner
-      id: vulnscan4
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'domoticz/domoticz:latest'
-        hide-progress: true
-        format: 'json'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        #vuln-type: 'os,library'
-        severity: ${{ env.VULN_SEVERITY }}
-        #exit-code: '1' 
-        output: 'json.json'
-        
-    # ...and then use the action as you would normally do, but providing the path to the repo
-    - uses: EndBug/add-and-commit@v9
-      with:
-        message: 'AutoCommit: Add json file '
-        add: 'json.json'        

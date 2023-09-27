@@ -5,7 +5,8 @@ on:
       - main
 
 env:
-  VULN_SEVERITY: 'CRITICAL'
+  VULN_SEVERITY: 'MEDIUM,HIGH,CRITICAL'
+  TIMEOUT_SCAN: '2m0s'
   
 jobs:
   Build-Docker-image:
@@ -38,8 +39,8 @@ jobs:
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
-        message: 'Add table file'
-        add: './table.md'
+        message: 'AutoCommit: Add table file'
+        add: 'table.md'
 
 
     - name: Run Trivy vulnerability scanner
@@ -48,7 +49,7 @@ jobs:
       with:
         image-ref: 'domoticz/domoticz:latest'
         hide-progress: true
-        format: 'table'
+        format: 'github'
         ignore-unfixed: true
         vuln-type: 'os,library'
         #vuln-type: 'os,library'
@@ -59,8 +60,8 @@ jobs:
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
-        message: 'Add github file'
-        add: './github.md'
+        message: 'AutoCommit: Add github file'
+        add: 'github.md'
 
 
     - name: Run Trivy vulnerability scanner
@@ -69,7 +70,7 @@ jobs:
       with:
         image-ref: 'domoticz/domoticz:latest'
         hide-progress: true
-        format: 'table'
+        format: 'sarif'
         ignore-unfixed: true
         vuln-type: 'os,library'
         #vuln-type: 'os,library'
@@ -80,8 +81,8 @@ jobs:
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
-        message: 'Add sarif file '
-        add: './sarif.sarif'
+        message: 'AutoCommit: Add sarif file '
+        add: 'sarif.sarif'
 
 
 
@@ -93,7 +94,7 @@ jobs:
       with:
         image-ref: 'domoticz/domoticz:latest'
         hide-progress: true
-        format: 'table'
+        format: 'json'
         ignore-unfixed: true
         vuln-type: 'os,library'
         #vuln-type: 'os,library'
@@ -104,5 +105,5 @@ jobs:
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
-        message: 'Add json file '
-        add: './json.json'        
+        message: 'AutoCommit: Add json file '
+        add: 'json.json'        

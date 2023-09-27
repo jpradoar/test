@@ -10,61 +10,24 @@ env:
 jobs:
   Build-Docker-image:
     runs-on: ubuntu-latest 
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
     
     steps:
      
-    - name: Checkout
-      uses: actions/checkout@v3
+    #- name: Checkout
+    #  uses: actions/checkout@v3
 
         
-    - name: Run Trivy vulnerability scanner
-      id: vulnscan
-      uses: aquasecurity/trivy-action@master
+
+
+    - uses: actions/checkout@v3
       with:
-        image-ref: 'domoticz/domoticz:latest'
-        hide-progress: true
-        format: 'table'
-        ignore-unfixed: true
-        vuln-type: 'os'
-        #vuln-type: 'os,library'
-        severity: ${{ env.VULN_SEVERITY }}
-        #exit-code: '1'              
+        ref: ${{ github.head_ref }}
 
 
-
-
-    - uses: actions/github-script@v6
-      env:
-        PLAN: "${{ steps.vulnscan.outputs.stdout }}"
+    - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        github-token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
-        script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.vulnscan.outcome }}\`
-          #### vulnscan Initialization ⚙️\`${{ steps.vulnscan.outcome }}\`
-          #### vulnscan Validation 🤖\`${{ steps.vulnscan.outcome }}\`
-          <details><summary>Validation Output</summary>
-    
-          \`\`\`\n
-          ${{ steps.vulnscan.outputs.stdout }}
-          \`\`\`
-    
-          </details>
-    
-          #### vulnscan Plan 📖\`${{ steps.vulnscan.outcome }}\`
-    
-          <details><summary>Show Plan</summary>
-    
-          \`\`\`\n
-          ${process.env.PLAN}
-          \`\`\`
-    
-          </details>
-    
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-    
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
+        commit_message: test commit 

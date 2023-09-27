@@ -11,9 +11,9 @@ jobs:
   Build-Docker-image:
     runs-on: ubuntu-latest 
 
-    #permissions:
+    permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
-     # contents: write
+      contents: write
     
     steps:
      

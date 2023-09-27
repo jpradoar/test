@@ -1,5 +1,263 @@
-
-domoticz/domoticz:latest (debian 11.7)
-======================================
-Total: 0 (CRITICAL: 0)
-
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "domoticz/domoticz:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "debian",
+      "Name": "11.7"
+    },
+    "ImageID": "sha256:e2f67f3123c7303c55a1a24428035aea609d2e1157495cccb6f361f02e8a3bba",
+    "DiffIDs": [
+      "sha256:6e3b92711bf1028e9565d1f7bdae6de5d1323597de24629c27d757060eaa3019",
+      "sha256:f392239ee85937fc691aeea7b2640b1b820b67d8b8d3c38fa7554f4f29d6381e",
+      "sha256:3d978ad4de8275705954d19caad86f9d82a7cb61a064009c7b842cf389a2148e",
+      "sha256:2e509f7b1c6b463bbe58c16158c3991c51a6b37a7e405ac4f3b33dc34b6fea49",
+      "sha256:447a1f478ae809ed6afc03d98fd119b8616fe70e545ed5e8a734d4b7e4b29ff9"
+    ],
+    "RepoTags": [
+      "domoticz/domoticz:latest"
+    ],
+    "RepoDigests": [
+      "domoticz/domoticz@sha256:7f4513d7cfd29fb6dfb151fcb463cb642d7b1dbe325bf49e6a939f8b6ab8d07b"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2023-09-18T15:18:39.024929015Z",
+      "history": [
+        {
+          "created": "2023-09-07T00:21:13.444807009Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:cb5fcc80c057b356a31492a20c6e3a75b70ed70a663506c8e97ad730ae32a02d in / "
+        },
+        {
+          "created": "2023-09-07T00:21:13.838729514Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"bash\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "ARG APP_VERSION",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "ARG APP_HASH",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "ARG BUILD_DATE",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "ARG STABLE",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "LABEL org.label-schema.version=15555 org.label-schema.build-date=2023-09-18T09:18:01Z org.label-schema.vcs-ref=94ed578b5 org.label-schema.vcs-url=https://github.com/domoticz/domoticz org.label-schema.url=https://domoticz.com/ org.label-schema.vendor=Domoticz org.label-schema.name=Domoticz org.label-schema.description=Domoticz open source Home Automation system org.label-schema.license=GPLv3 org.label-schema.docker.cmd=docker run -v ./config:/config -v ./plugins:/opt/domoticz/plugins -e DATABASE_PATH=/config/domoticz.db -p 8080:8080 -d domoticz/domoticz maintainer=Domoticz Docker Maintainers \u003cinfo@domoticz.com\u003e",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "WORKDIR /opt/domoticz",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-09-18T15:18:21.690885264Z",
+          "created_by": "ARG DEBIAN_FRONTEND=noninteractive",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "RUN |5 APP_VERSION=15555 APP_HASH=94ed578b5 BUILD_DATE=2023-09-18T09:18:01Z STABLE= DEBIAN_FRONTEND=noninteractive /bin/sh -c set -ex     \u0026\u0026 apt-get update     \u0026\u0026 apt-get install --no-install-recommends -y         tzdata         unzip         git         jq         libudev-dev         libusb-0.1-4         libsqlite3-0         curl libcurl4 libcurl4-gnutls-dev         libpython3.9-dev         python3         python3-pip     \u0026\u0026 OS=\"$(uname -s | sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')\"     \u0026\u0026 MACH=$(uname -m)     \u0026\u0026 if [ ${MACH} = \"armv6l\" ]; then MACH = \"armv7l\"; fi     \u0026\u0026 archive_file=\"domoticz_${OS}_${MACH}.tgz\"     \u0026\u0026 version_file=\"version_${OS}_${MACH}.h\"     \u0026\u0026 history_file=\"history_${OS}_${MACH}.txt\"     \u0026\u0026 if [ -z \"$STABLE\"]; then curl -k -L https://releases.domoticz.com/releases/beta/${archive_file} --output domoticz.tgz; else curl -k -L https://releases.domoticz.com/releases/release/${archive_file} --output domoticz.tgz; fi     \u0026\u0026 tar xfz domoticz.tgz     \u0026\u0026 rm domoticz.tgz     \u0026\u0026 mkdir -p /opt/domoticz/userdata     \u0026\u0026 rm -rf /var/lib/apt/lists/*     \u0026\u0026 pip3 install setuptools requests # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "VOLUME [/opt/domoticz/userdata]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "EXPOSE map[8080/tcp:{}]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "EXPOSE map[443/tcp:{}]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV LOG_PATH=",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV DATABASE_PATH=",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV WWW_PORT=8080",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV SSL_PORT=443",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV EXTRA_CMD_ARG=",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.88651456Z",
+          "created_by": "ENV TZ=Europe/Amsterdam",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:38.954484036Z",
+          "created_by": "COPY docker-entrypoint.sh /usr/local/bin/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-09-18T15:18:39.024929015Z",
+          "created_by": "RUN |5 APP_VERSION=15555 APP_HASH=94ed578b5 BUILD_DATE=2023-09-18T09:18:01Z STABLE= DEBIAN_FRONTEND=noninteractive /bin/sh -c chmod +x /usr/local/bin/docker-entrypoint.sh     \u0026\u0026 ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-09-18T15:18:39.024929015Z",
+          "created_by": "ENTRYPOINT [\"docker-entrypoint.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-09-18T15:18:39.024929015Z",
+          "created_by": "CMD [\"/opt/domoticz/domoticz\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:6e3b92711bf1028e9565d1f7bdae6de5d1323597de24629c27d757060eaa3019",
+          "sha256:f392239ee85937fc691aeea7b2640b1b820b67d8b8d3c38fa7554f4f29d6381e",
+          "sha256:3d978ad4de8275705954d19caad86f9d82a7cb61a064009c7b842cf389a2148e",
+          "sha256:2e509f7b1c6b463bbe58c16158c3991c51a6b37a7e405ac4f3b33dc34b6fea49",
+          "sha256:447a1f478ae809ed6afc03d98fd119b8616fe70e545ed5e8a734d4b7e4b29ff9"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "/opt/domoticz/domoticz"
+        ],
+        "Entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "LOG_PATH=",
+          "DATABASE_PATH=",
+          "WWW_PORT=8080",
+          "SSL_PORT=443",
+          "EXTRA_CMD_ARG=",
+          "TZ=Europe/Amsterdam"
+        ],
+        "Labels": {
+          "maintainer": "Domoticz Docker Maintainers \u003cinfo@domoticz.com\u003e",
+          "org.label-schema.build-date": "2023-09-18T09:18:01Z",
+          "org.label-schema.description": "Domoticz open source Home Automation system",
+          "org.label-schema.docker.cmd": "docker run -v ./config:/config -v ./plugins:/opt/domoticz/plugins -e DATABASE_PATH=/config/domoticz.db -p 8080:8080 -d domoticz/domoticz",
+          "org.label-schema.license": "GPLv3",
+          "org.label-schema.name": "Domoticz",
+          "org.label-schema.url": "https://domoticz.com/",
+          "org.label-schema.vcs-ref": "94ed578b5",
+          "org.label-schema.vcs-url": "https://github.com/domoticz/domoticz",
+          "org.label-schema.vendor": "Domoticz",
+          "org.label-schema.version": "15555"
+        },
+        "Volumes": {
+          "/opt/domoticz/userdata": {}
+        },
+        "WorkingDir": "/opt/domoticz",
+        "ExposedPorts": {
+          "443/tcp": {},
+          "8080/tcp": {}
+        },
+        "ArgsEscaped": true
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "domoticz/domoticz:latest (debian 11.7)",
+      "Class": "os-pkgs",
+      "Type": "debian"
+    },
+    {
+      "Target": "/opt/domoticz/server_cert.pem",
+      "Class": "secret",
+      "Secrets": [
+        {
+          "RuleID": "private-key",
+          "Category": "AsymmetricPrivateKey",
+          "Severity": "HIGH",
+          "Title": "Asymmetric Private Key",
+          "StartLine": 1,
+          "EndLine": 1,
+          "Code": {
+            "Lines": [
+              {
+                "Number": 1,
+                "Content": "-----BEGIN RSA PRIVATE KEY-----**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************-----END RSA PRIVATE KEY----- ",
+                "IsCause": true,
+                "Annotation": "",
+                "Truncated": false,
+                "Highlighted": "-----BEGIN RSA PRIVATE KEY-----**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************-----END RSA PRIVATE KEY----- ",
+                "FirstCause": true,
+                "LastCause": true
+              },
+              {
+                "Number": 2,
+                "Content": "-----BEGIN CERTIFICATE-----",
+                "IsCause": false,
+                "Annotation": "",
+                "Truncated": false,
+                "Highlighted": "-----BEGIN CERTIFICATE-----",
+                "FirstCause": false,
+                "LastCause": false
+              }
+            ]
+          },
+          "Match": "----BEGIN RSA PRIVATE KEY-----**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************-----END RSA PRIVATE",
+          "Layer": {
+            "Digest": "sha256:1744400b19d85f16c9b7ed1061a1e51ea6a81ca07c89bdb928661703b21f3920",
+            "DiffID": "sha256:3d978ad4de8275705954d19caad86f9d82a7cb61a064009c7b842cf389a2148e",
+            "CreatedBy": "RUN |5 APP_VERSION=15555 APP_HASH=94ed578b5 BUILD_DATE=2023-09-18T09:18:01Z STABLE= DEBIAN_FRONTEND=noninteractive /bin/sh -c set -ex     \u0026\u0026 apt-get update     \u0026\u0026 apt-get install --no-install-recommends -y         tzdata         unzip         git         jq         libudev-dev         libusb-0.1-4         libsqlite3-0         curl libcurl4 libcurl4-gnutls-dev         libpython3.9-dev         python3         python3-pip     \u0026\u0026 OS=\"$(uname -s | sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')\"     \u0026\u0026 MACH=$(uname -m)     \u0026\u0026 if [ ${MACH} = \"armv6l\" ]; then MACH = \"armv7l\"; fi     \u0026\u0026 archive_file=\"domoticz_${OS}_${MACH}.tgz\"     \u0026\u0026 version_file=\"version_${OS}_${MACH}.h\"     \u0026\u0026 history_file=\"history_${OS}_${MACH}.txt\"     \u0026\u0026 if [ -z \"$STABLE\"]; then curl -k -L https://releases.domoticz.com/releases/beta/${archive_file} --output domoticz.tgz; else curl -k -L https://releases.domoticz.com/releases/release/${archive_file} --output domoticz.tgz; fi     \u0026\u0026 tar xfz domoticz.tgz     \u0026\u0026 rm domoticz.tgz     \u0026\u0026 mkdir -p /opt/domoticz/userdata     \u0026\u0026 rm -rf /var/lib/apt/lists/*     \u0026\u0026 pip3 install setuptools requests # buildkit"
+          }
+        }
+      ]
+    }
+  ]
+}

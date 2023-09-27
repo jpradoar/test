@@ -17,22 +17,13 @@ jobs:
     
     steps:
      
-    - run: echo "Commit Message 1" >> commitmessage.txt
-    - run: echo "Commit Message 2" >> commitmessage.txt
-    - run: echo "Commit Message 3" >> commitmessage.txt
+    - uses: actions/checkout@v3
 
-    # Create a multiline string to be used by the git-auto-commit Action
-    - name: Set commit message
-      id: commit_message_step
-      run: |
-        echo 'commit_message<<EOF' >> $GITHUB_OUTPUT
-        cat commitmessage.txt >> $GITHUB_OUTPUT
-        echo 'EOF' >> $GITHUB_OUTPUT
+    # You can make whatever type of change to the repo...
+    - run: echo "Hello world" > ./file.txt
 
-
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v9
+    # ...and then use the action as you would normally do, but providing the path to the repo
+    - uses: EndBug/add-and-commit@v9
       with:
-        author_name: AutoCommit
-        message: 'AutoCommit'
-        add: 'commitmessage.txt'
+        message: 'Add the very useful text file'
+        add: './file.txt'

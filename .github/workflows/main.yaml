@@ -11,19 +11,52 @@ jobs:
   Build-Docker-image:
     runs-on: ubuntu-latest 
 
-    permissions:
+    #permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
-      contents: write
+     # contents: write
     
     steps:
      
     - uses: actions/checkout@v3
 
     # You can make whatever type of change to the repo...
-    - run: echo "Hello world v2" > ./file.txt
 
+    - name: Run Trivy vulnerability scanner
+      id: vulnscan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'domoticz/domoticz:latest'
+        hide-progress: true
+        format: 'table'
+        ignore-unfixed: true
+        vuln-type: 'os'
+        #vuln-type: 'os,library'
+        severity: ${{ env.VULN_SEVERITY }}
+        #exit-code: '1' 
+        output: 'app-01.md'
+        
     # ...and then use the action as you would normally do, but providing the path to the repo
     - uses: EndBug/add-and-commit@v9
       with:
         message: 'Add the very useful text file'
-        add: './file.txt'
+        add: './app-01.md'
+
+
+    - name: Run Trivy vulnerability scanner v2
+      id: vulnscan2
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'domoticz/domoticz:latest'
+        hide-progress: true
+        ignore-unfixed: true
+        vuln-type: 'os'
+        #vuln-type: 'os,library'
+        severity: ${{ env.VULN_SEVERITY }}
+        #exit-code: '1' 
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'

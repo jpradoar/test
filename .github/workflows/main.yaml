@@ -17,17 +17,22 @@ jobs:
     
     steps:
      
-    #- name: Checkout
-    #  uses: actions/checkout@v3
+    - run: echo "Commit Message 1" >> commitmessage.txt
+    - run: echo "Commit Message 2" >> commitmessage.txt
+    - run: echo "Commit Message 3" >> commitmessage.txt
 
-        
+    # Create a multiline string to be used by the git-auto-commit Action
+    - name: Set commit message
+      id: commit_message_step
+      run: |
+        echo 'commit_message<<EOF' >> $GITHUB_OUTPUT
+        cat commitmessage.txt >> $GITHUB_OUTPUT
+        echo 'EOF' >> $GITHUB_OUTPUT
 
-
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.head_ref }}
-
+    # Quick and dirty step to get rid of the temporary file holding the commit message
+    - run: rm -rf commitmessage.txt
 
     - uses: stefanzweifel/git-auto-commit-action@v4
+      id: commit
       with:
-        commit_message: test commit 
+        commit_message: ${{ steps.commit_message_step.outputs.commit_message }}

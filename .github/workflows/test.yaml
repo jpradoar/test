@@ -15,7 +15,7 @@ jobs:
       security-events: write
       # only required for workflows in private repositories
       actions: read
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout code
@@ -27,13 +27,14 @@ jobs:
           scan-type: 'fs'
           ignore-unfixed: true
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: 'repo-vuln.sarif'
           severity: 'CRITICAL'
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+      - uses: EndBug/add-and-commit@v9
         with:
-          sarif_file: 'trivy-results.sarif'     
+          message: 'AutoCommit: Add table file'
+          add: ./vuln_scans/repo-vuln.sarif
+          committer_name: 'AutoCommit'
 
 
       - name: Upload SARIF file

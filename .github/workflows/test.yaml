@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    #paths:
-    #  - '.github/workflows/vuln_scan.yaml'
+    paths:
+      - '.github/workflows/test.yaml'
   
 jobs:
   Build-Docker-image:
@@ -37,12 +37,12 @@ jobs:
           committer_name: 'AutoCommit'
 
 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: results.sarif
-          # Optional category for the results
-          # Used to differentiate multiple results for one commit
-          category: my-analysis-tool
+      #- name: Upload SARIF file
+      #  uses: github/codeql-action/upload-sarif@v2
+      #  with:
+      #    # Path to SARIF file relative to the root of the repository
+      #    sarif_file: results.sarif
+      #    # Optional category for the results
+      #    # Used to differentiate multiple results for one commit
+      #    category: my-analysis-tool
 

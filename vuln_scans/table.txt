@@ -1,7 +1,7 @@
 
 domoticz/domoticz:latest (debian 11.7)
 ======================================
-Total: 227 (MEDIUM: 112, HIGH: 104, CRITICAL: 11)
+Total: 228 (MEDIUM: 113, HIGH: 104, CRITICAL: 11)
 
 ┌───────────────────────┬────────────────┬──────────┬──────────────┬────────────────────────┬───────────────┬──────────────────────────────────────────────────────────────┐
 │        Library        │ Vulnerability  │ Severity │    Status    │   Installed Version    │ Fixed Version │                            Title                             │
@@ -631,6 +631,9 @@ Total: 227 (MEDIUM: 112, HIGH: 104, CRITICAL: 11)
 │                       ├────────────────┤          │              │                        ├───────────────┼──────────────────────────────────────────────────────────────┤
 │                       │ CVE-2023-42755 │          │              │                        │               │ wild pointer access in rsvp_classify()                       │
 │                       │                │          │              │                        │               │ https://avd.aquasec.com/nvd/cve-2023-42755                   │
+│                       ├────────────────┤          │              │                        ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2023-42756 │          │              │                        │               │ race condition between IPSET_CMD_ADD and IPSET_CMD_SWAP      │
+│                       │                │          │              │                        │               │ https://avd.aquasec.com/nvd/cve-2023-42756                   │
 │                       ├────────────────┤          │              │                        ├───────────────┼──────────────────────────────────────────────────────────────┤
 │                       │ CVE-2023-4569  │          │              │                        │               │ information leak in nft_set_catchall_flush in                │
 │                       │                │          │              │                        │               │ net/netfilter/nf_tables_api.c                                │

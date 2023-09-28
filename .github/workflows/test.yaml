@@ -26,14 +26,14 @@ jobs:
         with:
           scan-type: 'fs'
           ignore-unfixed: true
-          format: 'sarif'
-          output: 'repo-vuln.sarif'
+          format: 'table'
+          output: 'repo-vuln.txt'
           severity: 'CRITICAL'
 
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'AutoCommit: Add table file'
-          add: ./vuln_scans/repo-vuln.sarif
+          add: './vuln_scans/repo-vuln.txt'
           committer_name: 'AutoCommit'
 
 

@@ -47,4 +47,4 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
-        token: ${{ secrets.GH_COMMIT_COMMENT_TOKEN }}
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

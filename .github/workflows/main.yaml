@@ -36,7 +36,7 @@ jobs:
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
         #format: ${{ env.VULN_FORMAT }}
-        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || '' }}
+        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}

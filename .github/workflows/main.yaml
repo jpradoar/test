@@ -16,7 +16,7 @@ env:
   VULN_TIMEOUT_SCAN: '2m0s'
   
 jobs:
-  Run job ${{ env.REPO_APP }}:
+  Run job test-app:
     runs-on: ubuntu-latest 
 
     permissions:

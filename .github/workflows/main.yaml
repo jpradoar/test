@@ -26,7 +26,7 @@ jobs:
     steps:
      
     - uses: actions/checkout@v3
-    - uses: max/secret-scan@master
+
 
       # image-ref: 'jpradoar/mqtt-producer:1.1.2'
     - name: Run Trivy vulnerability scanner

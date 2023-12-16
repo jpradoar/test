@@ -9,8 +9,7 @@ env:
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
-  VULN_TIMEOUT_SCAN: '2m0s'
-  VULN_OUTPUT_FILE: 'test_vuln_scan.txt'
+  VULN_OUTPUT_FILE: 'test_vuln_scan'
   COMMITER_NAME: 'AutoCommit'
   VULN_SEVERITY: 'CRITICAL'
   VULN_TYPE: 'os,library'
@@ -40,17 +39,16 @@ jobs:
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: vuln_scans/${{ env.VULN_OUTPUT_FILE }}     
+        output: vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif     
         #exit-code: '1' 
 
     - name: DEBUG Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: './vuln_scans/debug-trivy-results.sarif'
+        sarif_file: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
         
     # ...and then use the action as you would normally do, but providing the path to the repo
-    - uses: EndBug/add-and-commit@v9
-      with:
-        message: 'AutoCommit: Add table file'
-        add: './vuln_scans/debug-trivy-results__v2.sarif'
-
+    #- uses: EndBug/add-and-commit@v9
+    #  with:
+    #    message: 'AutoCommit: Add table file'
+    #    add: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'

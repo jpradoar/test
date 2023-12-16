@@ -32,8 +32,12 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
+        format: ${{ env.VULN_FORMAT }}
+        vuln-type: ${{ env.VULN_TYPE }}
+        severity: ${{ env.VULN_SEVERITY }}
+        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        #output: 'trivy-results.sarif'
+        #exit-code: '1' 
 
     # If you prefere, can enable it and send scan to  GitHub Security tab
     # Remember that require declare in trovu actoin use "format: sarif"

@@ -27,23 +27,14 @@ jobs:
      
     - uses: actions/checkout@v3
 
-    # You can make whatever type of change to the repo...
-
     - name: Run Trivy vulnerability scanner
-      id: vulnscan
       uses: aquasecurity/trivy-action@master
       with:
-        #image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/${{ env.REPO_APP }}:${{ steps.nversion.outputs.NEW_VERSION }}'
-        image-ref: 'jpradoar/mqtt-producer:1.1.2'
-        format: ${{ env.VULN_FORMAT }}
-        vuln-type: ${{ env.VULN_TYPE }}
-        severity: ${{ env.VULN_SEVERITY }}
-        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: '${{ env.REPO_APP }}.sarif'
-        #exit-code: '1' 
+        image-ref: domoticz/domoticz:latest
+        format: 'sarif'
+        output: 'trivy-results.sarif'
 
     - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: '${{ env.REPO_APP }}.sarif'
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        sarif_file: 'trivy-results.sarif'

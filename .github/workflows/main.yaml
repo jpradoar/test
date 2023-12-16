@@ -31,15 +31,24 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
-        format: 'sarif'
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
+    - name: Run Trivy vulnerability scanner
+      id: vulnscan
+      uses: aquasecurity/trivy-action@master
+      with:
+        #image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/${{ env.REPO_APP }}:${{ steps.nversion.outputs.NEW_VERSION }}'
+        image-ref: 'jpradoar/mqtt-producer:1.1.2'
+        vuln-type: ${{ env.VULN_TYPE }}
+        severity: ${{ env.VULN_SEVERITY }}
+        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
+        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+        #exit-code: '1' 
 
     - name: Upload Trivy scan GH Security tab
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-
         
     - name: Upload ${{ env.REPO_APP }} vuln scan file
       uses: EndBug/add-and-commit@v9

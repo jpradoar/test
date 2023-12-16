@@ -32,12 +32,11 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
-        format: 'table'
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         #output: 'trivy-results.sarif'
 
     - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         

@@ -42,13 +42,9 @@ jobs:
         output: vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif     
         #exit-code: '1' 
 
-    - name: DEBUG Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
-        
+       
     # ...and then use the action as you would normally do, but providing the path to the repo
-    #- uses: EndBug/add-and-commit@v9
-    #  with:
-    #    message: 'AutoCommit: Add table file'
-    #    add: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
+    - uses: EndBug/add-and-commit@v9
+      with:
+        message: 'AutoCommit: Add table file'
+        add: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'

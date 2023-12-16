@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  REPO_APP: 'noname-file4'
+  REPO_APP: 'noname-file5'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
@@ -15,7 +15,7 @@ env:
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
   VULN_EXIT_CODE: '0' # 0=pipeline continue  1=pipeline finish. 
-  VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
+  VULN_SCAN_SEND_SECURITY_TAB: true # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   
 jobs:
   Demo-job-test:

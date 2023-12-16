@@ -5,11 +5,10 @@ on:
       - main
 
 env:
-  REPO_APP: 'nones'
+  REPO_APP: 'noname-file'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
-  VULN_OUTPUT_FILE: 'test_vuln_scan'
   COMMITER_NAME: 'AutoCommit'
   VULN_SEVERITY: 'CRITICAL,HIGH'
   VULN_TYPE: 'os,library'
@@ -40,11 +39,11 @@ jobs:
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
+        output: '${{ env.REPO_APP }}.sarif'
         #exit-code: '1' 
 
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: './vuln_scans/${{ env.VULN_OUTPUT_FILE }}.sarif'
+        sarif_file: '${{ env.REPO_APP }}.sarif'
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

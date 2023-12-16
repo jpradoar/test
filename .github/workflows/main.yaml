@@ -32,10 +32,17 @@ jobs:
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
         format: 'sarif'
-        output: 'vuln_scans/asd-trivy-results.sarif'
+        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
-    - name: Upload Trivy scan results to GitHub Security tab
-      #uses: github/codeql-action/upload-sarif@v1
+
+    - name: Upload Trivy scan GH Security tab
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: 'vuln_scans/asd-trivy-results.sarif'
+        sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+
+        
+    - name: Upload ${{ env.REPO_APP }} vuln scan file
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'AutoCommit: Add table file'
+        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'

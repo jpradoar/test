@@ -36,10 +36,10 @@ jobs:
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         #output: 'trivy-results.sarif'
 
-     - name: Upload Trivy scan results to GitHub Security tab
-       uses: github/codeql-action/upload-sarif@v1
-       with:
-         sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         
     - name: Upload ${{ env.REPO_APP }} vuln scan file
       uses: EndBug/add-and-commit@v9

@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  REPO_APP: 'noname-file2'
+  REPO_APP: 'noname-file3'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
@@ -15,7 +15,7 @@ env:
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
   VULN_EXIT_CODE: '0' # 0=pipeline continue  1=pipeline finish. 
-  VULN_SCAN_SEND_SECURITY_TAB: False # False, only commit vuln-scan |   # True, no commit vuln-scan but send output to Github Security tab
+  VULN_SCAN_SEND_SECURITY_TAB: false # False, only commit vuln-scan |   # True, no commit vuln-scan but send output to Github Security tab
   
 jobs:
   Demo-job-test:
@@ -36,14 +36,14 @@ jobs:
       with:
         image-ref: 'jpradoar/mqtt-producer:1.1.2'
         #format: ${{ env.VULN_FORMAT }}
-        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
+        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || '' }}
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         exit-code: ${{ env.VULN_EXIT_CODE }}
        
-    - name: Upload ${{ env.REPO_APP }} vuln scan file
+    - name: Upload Trivy scan file
       uses: EndBug/add-and-commit@v9
       with:
         message: 'AutoCommit: Add table file'
@@ -52,7 +52,7 @@ jobs:
     # If you prefere, can enable it and send scan to  GitHub Security tab
     # Remember that require use VULN_FORMAT: 'sarif'
     - name: Upload Trivy scan results to GitHub Security tab
-      if: env.VULN_SCAN_SEND_SECURITY_TAB != 'true'
+      if: env.VULN_SCAN_SEND_SECURITY_TAB == 'true'
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'

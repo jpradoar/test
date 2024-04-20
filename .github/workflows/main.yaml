@@ -51,17 +51,34 @@ jobs:
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
 
-    - uses: dacbd/create-issue-action@main
-      id: new-issue
+
+
+
+    - name: Create Issue
       if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
-      with:
-        token: ${{ github.token }}
-        title: vulnerability detected 
-        body: Automated new vulnerability detected on on ${{ env.REPO_APP }}
-    - run: |
+      run: |
+        echo "Creating new issue..."
+        echo "Vulnerability detection issue" > ISSUE_TEMPLATE.md
+        echo $GITHUB_EVENT_TITLE >> ISSUE_TEMPLATE.md
+        echo "Actor: ${{github.actor}}" >> ISSUE_TEMPLATE.md
+        echo " ------------------------------" >> ISSUE_TEMPLATE.md
+        cat ISSUE_TEMPLATE.md | github-issue create
         echo "${{ steps.new-issue.outputs.json }}" | jq
         echo "${{ steps.new-issue.outputs.json }}" | jq .state
         echo "${{ steps.new-issue.outputs.json }}" | jq .labels[].name
+
+
+    # - uses: dacbd/create-issue-action@main
+    #   id: new-issue
+    #   if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
+    #   with:
+    #     token: ${{ github.token }}
+    #     title: Docker container vulnerability detected 
+    #     body: Automated new vulnerability detected on ${{ env.REPO_APP }}
+    # - run: |
+    #     echo "${{ steps.new-issue.outputs.json }}" | jq
+    #     echo "${{ steps.new-issue.outputs.json }}" | jq .state
+    #     echo "${{ steps.new-issue.outputs.json }}" | jq .labels[].name
 
 
 

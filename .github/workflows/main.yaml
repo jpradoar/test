@@ -50,6 +50,22 @@ jobs:
         message: 'AutoCommit: Add table file'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
+
+    - uses: dacbd/create-issue-action@main
+      id: new-issue
+      if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
+      with:
+        token: ${{ github.token }}
+        title: vulnerability detected 
+        body: Automated new vulnerability detected on on ${{ env.REPO_APP }}
+    - run: |
+        echo "${{ steps.new-issue.outputs.json }}" | jq
+        echo "${{ steps.new-issue.outputs.json }}" | jq .state
+        echo "${{ steps.new-issue.outputs.json }}" | jq .labels[].name
+
+
+
+
     # If you prefere, can enable it and send scan to  GitHub Security tab
     # Remember that require use VULN_FORMAT: 'sarif'
     - name: Upload Trivy scan results to GitHub Security tab

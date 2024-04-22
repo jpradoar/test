@@ -54,7 +54,7 @@ jobs:
     - name: Check vulnerabilities and create GitHub issue if any found
       if: ${{ steps.trivy.outputs.exit_code == '0' }}  # Verifica si Trivy se ejecutó con éxito
       run: |
-        vulnerabilities=$(cat './vuln_scans/${{ env.REPO_APP }}_vuln_scan.txt')
+        vulnerabilities=$(cat './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif')
         if [[ -n "$vulnerabilities" ]]; then
           echo "Vulnerabilities found:"
           echo "$vulnerabilities"

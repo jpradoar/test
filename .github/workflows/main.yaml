@@ -51,35 +51,43 @@ jobs:
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
 
-
-
-
-    - name: Create Issue
-      if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
+    - name: Check vulnerabilities and create GitHub issue if any found
+      if: ${{ steps.trivy.outputs.exit_code == '0' }}  # Verifica si Trivy se ejecutó con éxito
       run: |
-        echo "Creating new issue..."
-        echo "Vulnerability detection issue" > ISSUE_TEMPLATE.md
-        echo $GITHUB_EVENT_TITLE >> ISSUE_TEMPLATE.md
-        echo "Actor: ${{github.actor}}" >> ISSUE_TEMPLATE.md
-        echo " ------------------------------" >> ISSUE_TEMPLATE.md
-        cat ISSUE_TEMPLATE.md #| github-issue create
-        # echo "${{ steps.new-issue.outputs.json }}" | jq
-        # echo "${{ steps.new-issue.outputs.json }}" | jq .state
-        # echo "${{ steps.new-issue.outputs.json }}" | jq .labels[].name
+        vulnerabilities=$(cat './vuln_scans/${{ env.REPO_APP }}_vuln_scan.txt')
+        if [[ -n "$vulnerabilities" ]]; then
+          echo "Vulnerabilities found:"
+          echo "$vulnerabilities"
+          echo "Creating GitHub issue..."
+          # Crea un issue en GitHub informando sobre las vulnerabilidades encontradas
+          # Podria usar la API git o un action como actions/github-script para esto
+          echo "::set-output name=create_issue::true"
+        else
+          echo "No vulnerabilities found."
+          echo "::set-output name=create_issue::false"
+        fi
 
+    - name: Create GitHub issue
+      if: ${{ steps.trivy.outputs.exit_code == '0' && steps.create_issue == 'true' }}
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const issueTitle = 'Vulnerabilities found in the latest scan';
+          const issueBody = `Trivy found vulnerabilities in the latest scan:
 
-    # - uses: dacbd/create-issue-action@main
-    #   id: new-issue
-    #   if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
-    #   with:
-    #     token: ${{ github.token }}
-    #     title: Docker container vulnerability detected 
-    #     body: Automated new vulnerability detected on ${{ env.REPO_APP }}
-    # - run: |
-    #     echo "${{ steps.new-issue.outputs.json }}" | jq
-    #     echo "${{ steps.new-issue.outputs.json }}" | jq .state
-    #     echo "${{ steps.new-issue.outputs.json }}" | jq .labels[].name
+          \`\`\`
+          ${process.env.REPO_APP}_vuln_scan.txt
+          \`\`\`
 
+          Please review and take necessary actions.`;
+          const octokit = require('@octokit/rest')();
+          octokit.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: issueTitle,
+            body: issueBody
+          });
 
 
 

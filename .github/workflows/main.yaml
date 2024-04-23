@@ -50,8 +50,10 @@ jobs:
       
     - name: Validate vulnerability status
       if: steps.vuln_status.outputs.vuln_status == '0'
-      run: echo "No hay vulnerabilidades"
+      run: |
+        echo "No hay vulnerabilidades"
     
     - name: Handle vulnerability status
-      if: steps.vuln_status.outputs.vuln_status == '1'
-      run: echo "hay al menos 1 vulnerabilidad"        
+      if: steps.vuln_status.outputs.vuln_status != '0'
+      run: |
+        echo "hay al menos 1 vulnerabilidad"        

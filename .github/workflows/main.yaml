@@ -33,8 +33,8 @@ jobs:
       uses: aquasecurity/trivy-action@master
       id: trivy_vulnerability
       with:
-        #image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
-        image-ref: 'alpine:20240329'
+        image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
+        #image-ref: 'alpine:20240329'
         format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}

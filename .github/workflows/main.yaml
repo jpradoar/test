@@ -51,9 +51,9 @@ jobs:
     - name: No hay vulnerabilidad
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |
-        echo "No hay vulnerabilidades"
+        echo "Espero un 0.  No hay vulnerabilidades"
     
     - name: hay vulnerabilidad
-      if: steps.vuln_status.outputs.vuln_status != '0'
+      if: steps.vuln_status.outputs.vuln_status == '1'
       run: |
-        echo "hay al menos 1 vulnerabilidad"        
+        echo "Espero un 1.  hay al menos 1 vulnerabilidad"        

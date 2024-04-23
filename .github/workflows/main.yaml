@@ -49,11 +49,11 @@ jobs:
         cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif | grep 'Total: 0' && echo 0 || echo 1
       
     - name: No hay vulnerabilidad
-      if: steps.vuln_status.outputs.vuln_status == '0'
+      if: steps.vuln_status.outputs.vuln_status == 0
       run: |
         echo "Espero un 0.  No hay vulnerabilidades"
     
     - name: hay vulnerabilidad
-      if: steps.vuln_status.outputs.vuln_status == '1'
+      if: steps.vuln_status.outputs.vuln_status == 1
       run: |
         echo "Espero un 1.  hay al menos 1 vulnerabilidad"        

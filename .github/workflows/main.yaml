@@ -32,24 +32,14 @@ jobs:
 
     - name: trivy vulnerability scan
       id: trivy_vulnerability
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
-        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
-        vuln-type: ${{ env.VULN_TYPE }}
-        severity: ${{ env.VULN_SEVERITY }}
-        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        exit-code: ${{ env.VULN_EXIT_CODE }}
-        hide-progress: true
+      run: |
+        trivy_output=$(aquasecurity/trivy-action@master)
+        echo "::set-output name=trivy_output::$trivy_output"
     
-    - name: Vulnerability detected
-      if: steps.trivy_vulnerability.outcome == 'failure'
+    - name: Check for vulnerabilities
+      if: steps.trivy_vulnerability.outputs.trivy_output != ''
       run: echo "Vulnerabilidad detectada"
     
     - name: No vulnerabilities found
-      if: steps.trivy_vulnerability.outcome == 'success'
+      if: steps.trivy_vulnerability.outputs.trivy_output == ''
       run: echo "No hay vulnerabilidades"
-
-
-

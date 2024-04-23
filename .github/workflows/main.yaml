@@ -32,7 +32,6 @@ jobs:
 
     - name: vulnerability found
       uses: aquasecurity/trivy-action@master
-      if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
       with:
         image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
         format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}

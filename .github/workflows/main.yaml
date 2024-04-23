@@ -14,7 +14,7 @@ env:
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
-  VULN_EXIT_CODE: '0' # 0=pipeline continue  1=pipeline finish. 
+  VULN_EXIT_CODE: '1' # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   
 jobs:

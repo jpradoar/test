@@ -29,26 +29,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Evaluate vulnerabilities
-      uses: aquasecurity/trivy-action@master
-      id: trivy_vulnerability
-      with:
-        image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
-        #image-ref: 'alpine:20240329'
-        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
-        vuln-type: ${{ env.VULN_TYPE }}
-        severity: ${{ env.VULN_SEVERITY }}
-        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        exit-code: ${{ env.VULN_EXIT_CODE }}
-       
 
+    - name: Run Trivy vulnerability scanner
+      id: trivy_vulnerability
+      run: trivy image --format table --exit-code 1 --vuln-type os,library --severity CRITICAL,HIGH jpradoar/mqtt-dbwriter:1.1.1
+    
+    - name: Check Trivy exit code
+      if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
+      run: echo "El análisis falló"
+    
     - name: with vulnerabilities
-      if: ${{ steps.trivy_vulnerability.outputs.trivy_exit_code == '1' }}
       run: |
            echo "with vulnerabilities"
 
-    - name: without vulnerabilities
-      if: ${{ steps.trivy_vulnerability.outputs.trivy_exit_code == '0' }}
-      run: |
-          echo "without vulnerabilities"

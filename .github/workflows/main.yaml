@@ -44,18 +44,11 @@ jobs:
        
 
     - name: with vulnerabilities
-      if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
+      if: ${{ steps.trivy_vulnerability.outputs.trivy_exit_code == '1' }}
       run: |
-          echo steps.trivy_vulnerability.outcome
-          echo steps.trivy_vulnerability.outcome == 1
+           echo "with vulnerabilities"
 
     - name: without vulnerabilities
-      if: ${{ steps.trivy_vulnerability.outcome == 'success' }}
+      if: ${{ steps.trivy_vulnerability.outputs.trivy_exit_code == '0' }}
       run: |
-          echo steps.trivy_vulnerability.outcome
-          echo steps.trivy_vulnerability.outcome == 0
-
-    - name: test output
-      run: |
-          echo "steps.trivy_vulnerability.outcome"
-          echo steps.trivy_vulnerability.outcome
+          echo "without vulnerabilities"

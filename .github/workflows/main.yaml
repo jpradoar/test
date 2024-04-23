@@ -46,14 +46,14 @@ jobs:
     - name: validate if exist vuln
       id: vuln_status
       run: |
-        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif | grep 'Total: 0'
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif | grep 'Total: 0' && echo 0 || echo 1
       
-    - name: Validate vulnerability status
+    - name: No hay vulnerabilidad
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |
         echo "No hay vulnerabilidades"
     
-    - name: Handle vulnerability status
+    - name: hay vulnerabilidad
       if: steps.vuln_status.outputs.vuln_status != '0'
       run: |
         echo "hay al menos 1 vulnerabilidad"        

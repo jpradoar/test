@@ -38,16 +38,9 @@ jobs:
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+        #output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         exit-code: ${{ env.VULN_EXIT_CODE }}
+        hide-progress: true
 
-        
-    - name: Check Trivy exit code
-      if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
-      run: echo "El análisis falló"
 
-    
-    - name: with vulnerabilities
-      run: |
-           echo "with vulnerabilities"
 

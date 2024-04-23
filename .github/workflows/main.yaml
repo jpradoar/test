@@ -14,7 +14,7 @@ env:
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
-  VULN_EXIT_CODE: '0' # 0=pipeline continue  1=pipeline finish. 
+  VULN_EXIT_CODE: '1' # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   
 jobs:
@@ -27,15 +27,14 @@ jobs:
       
     
     steps:
-     
     - uses: actions/checkout@v3
 
-      # image-ref: 'jpradoar/mqtt-producer:1.1.2'
-    - name: Run Trivy vulnerability scanner
+    - name: Evaluate vulnerabilities
       uses: aquasecurity/trivy-action@master
+      id: trivy_vulnerability
       with:
-        image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
-        #format: ${{ env.VULN_FORMAT }}
+        #image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
+        image-ref: 'alpine:20240329'
         format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
         vuln-type: ${{ env.VULN_TYPE }}
         severity: ${{ env.VULN_SEVERITY }}
@@ -43,58 +42,11 @@ jobs:
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
         exit-code: ${{ env.VULN_EXIT_CODE }}
        
-    - name: Upload Trivy scan file
-      if: env.VULN_SCAN_SEND_SECURITY_TAB == 'false'
-      uses: EndBug/add-and-commit@v9
-      with:
-        message: 'AutoCommit: Add table file'
-        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
+    - name: vulnerability failure
+      if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
+      run: echo steps.trivy_vulnerability.outcome == failure
 
-    - name: Check vulnerabilities and create GitHub issue if any found
-      if: ${{ steps.trivy.outputs.exit_code == '0' }}  # Verifica si Trivy se ejecutó con éxito
-      run: |
-        vulnerabilities=$(cat './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif')
-        if [[ -n "$vulnerabilities" ]]; then
-          echo "Vulnerabilities found:"
-          echo "$vulnerabilities"
-          echo "Creating GitHub issue..."
-          # Crea un issue en GitHub informando sobre las vulnerabilidades encontradas
-          # Podria usar la API git o un action como actions/github-script para esto
-          echo "::set-output name=create_issue::true"
-        else
-          echo "No vulnerabilities found."
-          echo "::set-output name=create_issue::false"
-        fi
-
-    - name: Create GitHub issue
-      if: ${{ steps.trivy.outputs.exit_code == '0' && steps.create_issue == 'true' }}
-      uses: actions/github-script@v4
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const issueTitle = 'Vulnerabilities found in the latest scan';
-          const issueBody = `Trivy found vulnerabilities in the latest scan:
-
-          \`\`\`
-          ${process.env.REPO_APP}_vuln_scan.txt
-          \`\`\`
-
-          Please review and take necessary actions.`;
-          const octokit = require('@octokit/rest')();
-          octokit.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: issueTitle,
-            body: issueBody
-          });
-
-
-
-    # If you prefere, can enable it and send scan to  GitHub Security tab
-    # Remember that require use VULN_FORMAT: 'sarif'
-    - name: Upload Trivy scan results to GitHub Security tab
-      if: env.VULN_SCAN_SEND_SECURITY_TAB == 'true'
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+    - name: vulnerability ok
+      if: ${{ steps.trivy_vulnerability.outcome == 'success' }}
+      run: echo steps.trivy_vulnerability.outcome == ok      

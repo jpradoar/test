@@ -43,6 +43,13 @@ jobs:
         exit-code: ${{ env.VULN_EXIT_CODE }}
         hide-progress: true
 
-    - name: test file 
-      run: cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-        
+    - name: validate if exist vuln
+      run: cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif | grep "Total: 0"
+
+    - name: Validate vulnerability status
+      if: steps.vuln_status.outputs.vuln_status == '0'
+      run: echo "No hay vulnerabilidades"
+    
+    - name: Handle vulnerability status
+      if: steps.vuln_status.outputs.vuln_status == '1'
+      run: echo "hay al menos 1 vulnerabilidad"        

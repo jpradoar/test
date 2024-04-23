@@ -52,12 +52,30 @@ jobs:
             echo "::set-output name=vuln_status::1"
           fi
       
-    - name: (0) No hay vulnerabilidad
+    - name: No vulnerability found
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |
         echo "Espero un 0.  No hay vulnerabilidades"
     
-    - name: (1) hay vulnerabilidad
+
+    - name: Create vulnerability issue
       if: steps.vuln_status.outputs.vuln_status == '1'
-      run: |
-        echo "Espero un 1.  hay al menos 1 vulnerabilidad"        
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const issueTitle = 'Vulnerabilities found in the latest scan';
+          const issueBody = `Trivy found vulnerabilities in the latest scan: vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+
+          \`\`\`
+          ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+          \`\`\`
+
+          Please review and take necessary actions.`;
+          const octokit = require('@octokit/rest')();
+          octokit.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: issueTitle,
+            body: issueBody
+          });        

@@ -43,10 +43,14 @@ jobs:
         exit-code: ${{ env.VULN_EXIT_CODE }}
        
 
-    - name: vulnerability failure
+    - name: with vulnerabilities
       if: ${{ steps.trivy_vulnerability.outcome == 'failure' }}
-      run: echo steps.trivy_vulnerability.outcome == failure
+      run: |
+          echo steps.trivy_vulnerability.outcome
+          echo steps.trivy_vulnerability.outcome == 1
 
-    - name: vulnerability ok
+    - name: without vulnerabilities
       if: ${{ steps.trivy_vulnerability.outcome == 'success' }}
-      run: echo steps.trivy_vulnerability.outcome == ok      
+      run: |
+          echo steps.trivy_vulnerability.outcome
+          echo steps.trivy_vulnerability.outcome == 0

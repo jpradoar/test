@@ -54,3 +54,8 @@ jobs:
       run: |
           echo steps.trivy_vulnerability.outcome
           echo steps.trivy_vulnerability.outcome == 0
+
+    - name: test output
+      run: |
+          echo "steps.trivy_vulnerability.outcome"
+          echo steps.trivy_vulnerability.outcome

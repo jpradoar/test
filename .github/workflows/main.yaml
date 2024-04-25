@@ -69,9 +69,9 @@ jobs:
         body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected" \
-        --body "This is a body" \
+        --body "This is a body zzz" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
-        --label bug --label "help wanted"
+        --label bug --label "help wanted" --label "security"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

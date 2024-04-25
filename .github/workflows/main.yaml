@@ -60,7 +60,10 @@ jobs:
     
     - name: Create Issue
       run: |
+        body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
         gh issue --repo ${{ github.repository }} \
-          create --title "Test Issue title" --body "Test Issue body"
+        create --title "Test Issue title" \
+        --label "security issue" \
+        --body "$body"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

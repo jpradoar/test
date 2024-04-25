@@ -57,6 +57,11 @@ jobs:
       run: |
         echo "Espero un 0.  No hay vulnerabilidades"
 
+    - name: print user
+      run: |
+        echo ${{ github.event.issue.user.login }}
+
+
     
     - name: Create Issue
       if: steps.vuln_status.outputs.vuln_status == '1'
@@ -64,6 +69,9 @@ jobs:
         body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected" \
-        --body "$body"
+        --body "This is a body" \
+        --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+        --assignee "@me" \
+        --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

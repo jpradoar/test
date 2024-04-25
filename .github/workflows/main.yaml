@@ -70,7 +70,7 @@ jobs:
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected" \
         --body "This is a body" \
-        --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+        --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "@me" \
         --label bug --label "help wanted"
       env:

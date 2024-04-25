@@ -10,7 +10,8 @@ env:
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
   COMMITER_NAME: 'AutoCommit'
-  VULN_SEVERITY: 'CRITICAL,HIGH'
+  VULN_SEVERITY: 'CRITICAL'
+  #VULN_SEVERITY: 'CRITICAL,HIGH'
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
@@ -69,7 +70,6 @@ jobs:
         body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected" \
-        --body "This is a body zzz" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"

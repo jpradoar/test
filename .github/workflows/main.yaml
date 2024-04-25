@@ -24,11 +24,11 @@ jobs:
       contents: write # get the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status  
+      issues: write # to create new issues in workflows
       
     
     steps:
     - uses: actions/checkout@v3
-
 
     - name: vulnerability found
       uses: aquasecurity/trivy-action@master
@@ -56,17 +56,11 @@ jobs:
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |
         echo "Espero un 0.  No hay vulnerabilidades"
-    
 
-    - name: Create vulnerability issue
-      if: steps.vuln_status.outputs.vuln_status == '1'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create Issue
       run: |
-        curl -L \
-        -X POST \
-        -H "Accept: application/vnd.github+json" \
-        -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-        -H "X-GitHub-Api-Version: 2022-11-28" \
-        https://api.github.com/repos/jpradoar/test/issues \
-        -d '{"title":"Found a bug","body":"I'\''m having a problem with this.","assignees":["octocat"],"milestone":1,"labels":["bug"]}'
+        gh issue --repo ${{ github.repository }} \
+          create --title "Test Issue title" --body "Test Issue body"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

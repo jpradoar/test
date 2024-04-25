@@ -72,6 +72,6 @@ jobs:
         --body "This is a body zzz" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
-        --label bug --label "help wanted" --label "security"
+        --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

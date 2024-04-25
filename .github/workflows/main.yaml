@@ -59,10 +59,11 @@ jobs:
 
     
     - name: Create Issue
+      if: steps.vuln_status.outputs.vuln_status == '1'
       run: |
         body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
         gh issue --repo ${{ github.repository }} \
-        create --title "Test Issue title" \
+        create --title "Vulnerability detected" \
         --body "$body"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

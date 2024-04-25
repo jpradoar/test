@@ -71,7 +71,7 @@ jobs:
         create --title "Vulnerability detected" \
         --body "This is a body" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
-        --assignee "@me" \
+        --assignee "jpradoar" \
         --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

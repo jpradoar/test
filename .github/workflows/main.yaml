@@ -91,7 +91,7 @@ jobs:
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue create \
         --repo ${{ github.repository }} \
-        --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
+        --title ":skull: [vuln] vulnerability detected on image ${{ env.REPO_APP }} " \
         --body-file '/tmp/vuln_info.md' \
         --assignee "jpradoar" \
         --label bug --label vulnerability

@@ -21,3 +21,5 @@ Total: 2 (CRITICAL: 2)
 │          │ CVE-2024-45492 │          │        │                   │               │ libexpat: integer overflow                 │
 │          │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-45492 │
 └──────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴────────────────────────────────────────────┘
+### See detailed vuln scan in: 
+[vuln_scans/noname-file5_vuln_scan](https://github.com/jpradoar/jpradoar/test/blob/main/vuln_scans/noname-file5_vuln_scan.sarif)

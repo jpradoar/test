@@ -1,26 +1,25 @@
 ---
-name: 🛠️ Feature Request
+name: 🚀 Feature Request
 description: Suggest an idea or improvement to our product
-title: "[Feature]: "
+title: "[Feat]: "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: >
-        **Thanks :heart: for taking the time to fill out this feature request report!** We kindly ask that you search to
-        see if an issue [already exists](https://github.com/wandb/wandb/issues?q=is%3Aissue+sort%3Acreated-desc+) for
+        **Thanks :heart: for taking the time to fill out this feature request report!** Please, first try to search to see if a similar issue or if [already exists](https://github.com/jpradoar/event-driven-architecture/issues?q=is%3Aopen+is%3Aissue) for
         your feature.
 
-        We are also happy to accept contributions from our users. For more details see
-        [here](https://github.com/wandb/wandb/blob/master/CONTRIBUTING.md).
+        we are open to accept any contribution from users or enthusiast. For more info please see
+        [here](https://github.com/jpradoar/event-driven-architecture/blob/master/CONTRIBUTING.md).
 
   - type: textarea
     attributes:
       label: Description
       description: |
-        A clear and concise description of the feature you're interested in.
+        A clear and concise description of the feature you're interested in...
       value: |
-        <!--- Describe your feature here --->
+         ... Add your feature description here :D 
     validations:
       required: true
 
@@ -31,6 +30,6 @@ body:
         Describe the solution you'd like. A clear and concise description of what you want to happen. If you have
         considered alternatives, please describe them.
       value: |
-        <!--- Describe your solution here --->
+          ... Add your suggested solution description here.
     validations:
       required: false

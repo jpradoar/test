@@ -1,77 +1,23 @@
 
+For OSS Maintainers: VEX Notice
+--------------------------------
+If you're an OSS maintainer and Trivy has detected vulnerabilities in your project that you believe are not actually exploitable, consider issuing a VEX (Vulnerability Exploitability eXchange) statement.
+VEX allows you to communicate the actual status of vulnerabilities in your project, improving security transparency and reducing false positives for your users.
+Learn more and start using VEX: https://aquasecurity.github.io/trivy/v0.56/docs/supply-chain/vex/repo#publishing-vex-documents
+
+To disable this notice, set the TRIVY_DISABLE_VEX_NOTICE environment variable.
+
+
 jpradoar/mqtt-dbwriter:1.1.1 (alpine 3.17.0)
 ============================================
-Total: 22 (HIGH: 22, CRITICAL: 0)
+Total: 2 (CRITICAL: 2)
 
-┌─────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬─────────────────────────────────────────────────────────────┐
-│   Library   │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                            Title                            │
-├─────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
-│ libcrypto3  │ CVE-2022-3996  │ HIGH     │ fixed  │ 3.0.7-r0          │ 3.0.7-r2      │ openssl: double locking leads to denial of service          │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-3996                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2022-4450  │          │        │                   │ 3.0.8-r0      │ openssl: double free after calling PEM_read_bio_ex          │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-4450                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0215  │          │        │                   │               │ openssl: use-after-free following BIO_new_NDEF              │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0215                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0216  │          │        │                   │               │ openssl: invalid pointer dereference in d2i_PKCS7 functions │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0216                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0217  │          │        │                   │               │ openssl: NULL dereference validating DSA public key         │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0217                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0286  │          │        │                   │               │ openssl: X.400 address type confusion in X.509 GeneralName  │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0286                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0401  │          │        │                   │               │ openssl: NULL dereference during PKCS7 data verification    │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0401                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0464  │          │        │                   │ 3.0.8-r1      │ openssl: Denial of service by excessive resource usage in   │
-│             │                │          │        │                   │               │ verifying X509 policy...                                    │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0464                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-5363  │          │        │                   │ 3.0.12-r0     │ openssl: Incorrect cipher key and IV length processing      │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-5363                   │
-├─────────────┼────────────────┤          │        ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
-│ libexpat    │ CVE-2023-52425 │          │        │ 2.5.0-r0          │ 2.6.0-r0      │ expat: parsing large tokens can trigger a denial of service │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-52425                  │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2024-28757 │          │        │                   │ 2.6.2-r0      │ expat: XML Entity Expansion                                 │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-28757                  │
-├─────────────┼────────────────┤          │        ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
-│ libssl3     │ CVE-2022-3996  │          │        │ 3.0.7-r0          │ 3.0.7-r2      │ openssl: double locking leads to denial of service          │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-3996                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2022-4450  │          │        │                   │ 3.0.8-r0      │ openssl: double free after calling PEM_read_bio_ex          │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-4450                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0215  │          │        │                   │               │ openssl: use-after-free following BIO_new_NDEF              │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0215                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0216  │          │        │                   │               │ openssl: invalid pointer dereference in d2i_PKCS7 functions │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0216                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0217  │          │        │                   │               │ openssl: NULL dereference validating DSA public key         │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0217                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0286  │          │        │                   │               │ openssl: X.400 address type confusion in X.509 GeneralName  │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0286                   │
-│             ├────────────────┤          │        │                   │               ├─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0401  │          │        │                   │               │ openssl: NULL dereference during PKCS7 data verification    │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0401                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-0464  │          │        │                   │ 3.0.8-r1      │ openssl: Denial of service by excessive resource usage in   │
-│             │                │          │        │                   │               │ verifying X509 policy...                                    │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-0464                   │
-│             ├────────────────┤          │        │                   ├───────────────┼─────────────────────────────────────────────────────────────┤
-│             │ CVE-2023-5363  │          │        │                   │ 3.0.12-r0     │ openssl: Incorrect cipher key and IV length processing      │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-5363                   │
-├─────────────┼────────────────┤          │        ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
-│ python3     │ CVE-2023-6597  │          │        │ 3.10.13-r0        │ 3.10.14-r0    │ An issue was found in the CPython                           │
-│             │                │          │        │                   │               │ `tempfile.TemporaryDirectory` class ...                     │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-6597                   │
-├─────────────┼────────────────┤          │        ├───────────────────┼───────────────┼─────────────────────────────────────────────────────────────┤
-│ sqlite-libs │ CVE-2023-7104  │          │        │ 3.40.1-r0         │ 3.40.1-r1     │ sqlite: heap-buffer-overflow at sessionfuzz                 │
-│             │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2023-7104                   │
-└─────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴─────────────────────────────────────────────────────────────┘
+┌──────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬────────────────────────────────────────────┐
+│ Library  │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                   Title                    │
+├──────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼────────────────────────────────────────────┤
+│ libexpat │ CVE-2024-45491 │ CRITICAL │ fixed  │ 2.5.0-r0          │ 2.6.3-r0      │ libexpat: Integer Overflow or Wraparound   │
+│          │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-45491 │
+│          ├────────────────┤          │        │                   │               ├────────────────────────────────────────────┤
+│          │ CVE-2024-45492 │          │        │                   │               │ libexpat: integer overflow                 │
+│          │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-45492 │
+└──────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴────────────────────────────────────────────┘

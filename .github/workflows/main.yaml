@@ -76,7 +76,7 @@ jobs:
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
-        create --title "![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  on image ${{ env.REPO_APP }} " \
+        create --title "Vulnerabilidy detected on image ${{ env.REPO_APP }} " \
         --body-file '/tmp/${{ env.REPO_APP }_vuln_info.md' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"

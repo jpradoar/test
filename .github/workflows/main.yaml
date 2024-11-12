@@ -51,7 +51,7 @@ jobs:
           else
             echo "::set-output name=vuln_status::1"
             echo "### See detailed vuln scan in: " >> ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/jpradoar/${{ github.repository }}/blob/main/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
           fi
 
 #            echo "### See detailed vuln scan in: " > /tmp/vuln_info.md

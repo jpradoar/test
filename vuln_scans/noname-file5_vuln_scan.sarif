@@ -8,16 +8,19 @@ Learn more and start using VEX: https://aquasecurity.github.io/trivy/v0.56/docs/
 To disable this notice, set the TRIVY_DISABLE_VEX_NOTICE environment variable.
 
 
-jpradoar/mqtt-dbwriter:1.1.1 (alpine 3.17.0)
-============================================
-Total: 2 (CRITICAL: 2)
+jpradoar/k8s-event-exporter:1.0.0 (alpine 3.19.0)
+=================================================
+Total: 0 (CRITICAL: 0)
 
-┌──────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬────────────────────────────────────────────┐
-│ Library  │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                   Title                    │
-├──────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼────────────────────────────────────────────┤
-│ libexpat │ CVE-2024-45491 │ CRITICAL │ fixed  │ 2.5.0-r0          │ 2.6.3-r0      │ libexpat: Integer Overflow or Wraparound   │
-│          │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-45491 │
-│          ├────────────────┤          │        │                   │               ├────────────────────────────────────────────┤
-│          │ CVE-2024-45492 │          │        │                   │               │ libexpat: integer overflow                 │
-│          │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-45492 │
-└──────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴────────────────────────────────────────────┘
+
+usr/local/bin/kubectl (gobinary)
+================================
+Total: 1 (CRITICAL: 1)
+
+┌─────────┬────────────────┬──────────┬────────┬───────────────────┬─────────────────┬────────────────────────────────────────────────────────────┐
+│ Library │ Vulnerability  │ Severity │ Status │ Installed Version │  Fixed Version  │                           Title                            │
+├─────────┼────────────────┼──────────┼────────┼───────────────────┼─────────────────┼────────────────────────────────────────────────────────────┤
+│ stdlib  │ CVE-2024-24790 │ CRITICAL │ fixed  │ 1.20.11           │ 1.21.11, 1.22.4 │ golang: net/netip: Unexpected behavior from Is methods for │
+│         │                │          │        │                   │                 │ IPv4-mapped IPv6 addresses                                 │
+│         │                │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2024-24790                 │
+└─────────┴────────────────┴──────────┴────────┴───────────────────┴─────────────────┴────────────────────────────────────────────────────────────┘

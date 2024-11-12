@@ -54,12 +54,12 @@ body:
     attributes:
       label: Can you participate developing this feat? 
       multiple: true
+      required: true
       options:
         - "Yes, of course!"
         - "yes, but i don't have all skills"
         - "Yes, but I don't have a lot of time"
         - "No, I'm sorry"
-      required: true
         
   - type: input
     attributes:

@@ -58,8 +58,11 @@ jobs:
             echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
             echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
             echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
-            cat /tmp/vuln_info.md
           fi
+
+
+    - name: cat /tmp/vuln_info.md
+      run: cat /tmp/vuln_info.md
 
 
     - name: No vulnerability found

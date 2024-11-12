@@ -31,7 +31,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: vulnerability found
-      uses: aquasecurity/trivy-action@master
+      uses: aquasecurity/trivy-action@0.28.0 #aquasecurity/trivy-action@master
       with:
         image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
         #image-ref: 'alpine:latest'

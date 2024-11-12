@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  REPO_APP: 'noname-file5'
+  REPO_APP: 'demo-app'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'

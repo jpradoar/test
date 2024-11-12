@@ -54,7 +54,6 @@ body:
     attributes:
       label: Can you participate developing this feat? 
       multiple: true
-      required: true
       options:
         - "Yes, of course!"
         - "yes, but i don't have all skills"

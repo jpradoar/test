@@ -16,6 +16,7 @@ env:
   VULN_TIMEOUT_SCAN: '2m0s'
   VULN_EXIT_CODE: 0 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
+  TRIVY_DISABLE_VEX_NOTICE: true
   
 jobs:
   Demo-job-test:
@@ -40,8 +41,11 @@ jobs:
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        exit-code: ${{ env.VULN_EXIT_CODE }}
+        exit-code: 
         hide-progress: true
+      env:
+        TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
+
 
     - name: validate if exist vuln
       id: vuln_status
@@ -54,6 +58,7 @@ jobs:
             echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
             echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
             echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
+            cat /tmp/vuln_info.md
           fi
 
 
@@ -70,28 +75,13 @@ jobs:
         committer_name: 'AutoCommit'
 
 
-    - name: Vulnerability detected - Create issue
-      if: steps.vuln_status.outputs.vuln_status == '1'
-      run: |
-        body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
-        gh issue --repo ${{ github.repository }} \
-        create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
-        --body-file '/tmp/vuln_info.md' \
-        --assignee "jpradoar" \
-        --label bug --label "help wanted"
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#         \
-
-    
-    #- name: Vulnerability detected - create Issue
+    #- name: Vulnerability detected - Create issue
     #  if: steps.vuln_status.outputs.vuln_status == '1'
     #  run: |
-    #    body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
+    #    body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
     #    gh issue --repo ${{ github.repository }} \
-    #    create --title "Vulnerability detected in commit: ${{ github.sha }}" \
-    #    --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
+    #    create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
+    #    --body-file '/tmp/vuln_info.md' \
     #    --assignee "jpradoar" \
     #    --label bug --label "help wanted"
     #  env:

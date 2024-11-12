@@ -3,6 +3,7 @@ name: 🚀 Feature Request
 description: Suggest an idea or improvement to our product
 title: "🚀 [Feat]: ..."
 labels: ["enhancement"]
+assignees: "not default"
 
 body:
 

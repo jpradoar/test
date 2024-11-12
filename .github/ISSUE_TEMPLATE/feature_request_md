@@ -2,9 +2,7 @@
 name: 🛠️ Feature Request
 description: Suggest an idea or improvement to our product
 title: "[Feature]: "
-labels:
-  - "enhancement"
-
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:

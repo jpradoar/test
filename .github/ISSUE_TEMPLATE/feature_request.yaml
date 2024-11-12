@@ -17,6 +17,8 @@ body:
         
         * For more info please see [CONTRIBUTING](https://github.com/jpradoar/event-driven-architecture/blob/master/CONTRIBUTING.md).
 
+
+
   - type: textarea
     attributes:
       label: Description
@@ -57,7 +59,8 @@ body:
         - "yes, but i don't have all skills"
         - "Yes, but I don't have a lot of time"
         - "No, I'm sorry"
-
+      required: true
+        
   - type: input
     attributes:
       label: Contact Details

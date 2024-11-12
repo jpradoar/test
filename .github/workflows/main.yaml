@@ -50,7 +50,7 @@ jobs:
             echo "::set-output name=vuln_status::0"
           else
             echo "::set-output name=vuln_status::1"
-            echo "### See detailed vuln scan in: "  > /tmp/${{ env.REPO_APP }_vuln_info.md
+            echo "### See detailed vuln scan in: "  > /tmp/${{ env.REPO_APP }}_vuln_info.md
             echo "<br> ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/${{ env.REPO_APP }_vuln_info.md
             echo " * [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/${{ env.REPO_APP }_vuln_info.md
           fi

@@ -71,11 +71,11 @@ jobs:
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected in commit: ${{ github.sha }}" \
-        --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TRIVY_DISABLE_VEX_NOTICE: false
 
     
     #- name: Vulnerability detected - create Issue

@@ -12,9 +12,9 @@ body:
       value: >
         **Thanks :heart: for taking the time to fill out this feature request report!** Please, first try to search to see if a similar issue or if [already exists](https://github.com/jpradoar/event-driven-architecture/issues?q=is%3Aopen+is%3Aissue) for
         your feature.
-
-        we are open to accept any contribution from users or enthusiast. For more info please see
-        [here](https://github.com/jpradoar/event-driven-architecture/blob/master/CONTRIBUTING.md).
+        
+        * We are open to accept any contribution from users or enthusiast. 
+        * For more info please see [CONTRIBUTING](https://github.com/jpradoar/event-driven-architecture/blob/master/CONTRIBUTING.md).
 
   - type: textarea
     attributes:
@@ -48,18 +48,16 @@ body:
         - For the product
 
   - type: dropdown
-    id: user_owned
     attributes:
       label: Can you participate developing this feat? 
       multiple: true
       options:
-        - Yes, of course!
-        - yes, but i dont have all skills
-        - Yes, but I dont have a lot of time
-        - No, im sorry
+        - "Yes, of course!"
+        - "yes, but i don't have all skills"
+        - "Yes, but I don't have a lot of time"
+        - "No, I'm sorry"
 
   - type: input
-    id: contact
     attributes:
       label: Contact Details
       description: How can we get in touch with you if we need more info?
@@ -72,7 +70,6 @@ body:
       label: "Anything else you'd like to add?"
       description: >
         free way for you...
-      value: |
-          ...
+      value:           
     validations:
       required: false

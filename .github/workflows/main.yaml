@@ -33,7 +33,7 @@ jobs:
     - name: vulnerability found
       uses: aquasecurity/trivy-action@0.28.0
       with:
-        image-ref: 'jpradoar/mqtt-dbwriter:1.1.1'
+        image-ref: 'jpradoar/k8s-event-exporter:1.0.0'
         #image-ref: 'alpine:latest'
         format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
         vuln-type: ${{ env.VULN_TYPE }}

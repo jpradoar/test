@@ -90,6 +90,6 @@ jobs:
         create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
         --body-file '/tmp/vuln_info.md' \
         --assignee "jpradoar" \
-        --label bug --label "help wanted"
+        --label bug --label vulnerability
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

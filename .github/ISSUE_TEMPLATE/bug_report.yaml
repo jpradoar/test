@@ -1,7 +1,7 @@
 ---
-name: 🐛🐞 Bug report
+name: 🐞 Bug report
 description: File a bug/issue
-title: "🐛 [bug] ..."
+title: "🐞 [bug] ..."
 labels: ["bug"]
 assignees: "not default"
 

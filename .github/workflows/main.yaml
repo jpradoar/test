@@ -50,9 +50,9 @@ jobs:
             echo "::set-output name=vuln_status::0"
           else
             echo "::set-output name=vuln_status::1"
-            echo "### See detailed vuln scan in: "  > /tmp/${{ env.REPO_APP }}_vuln_info.md
-            echo "<br> <br>" >> /tmp/${{ env.REPO_APP }}_vuln_info.md
-            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/${{ env.REPO_APP }_vuln_info.md
+            echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
+            echo "<br> <br>" >> /tmp/vuln_info.md
+            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
           fi
 
 
@@ -75,7 +75,7 @@ jobs:
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
         create --title "vulnerability detected on image ${{ env.REPO_APP }} " \
-        --body-file '/tmp/${{ env.REPO_APP }_vuln_info.md' \
+        --body-file '/tmp/vuln_info.md' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"
       env:

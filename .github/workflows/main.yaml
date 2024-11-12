@@ -50,8 +50,8 @@ jobs:
             echo "::set-output name=vuln_status::0"
           else
             echo "::set-output name=vuln_status::1"
-            echo "### vuln scan is on vuln_scan/ directory" > /tmp/vuln_info.md
-            echo "[${{ env.REPO_APP }}_vuln_scan](/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
+            echo "### See detailed vuln scan in: " > /tmp/vuln_info.md
+            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/jpradoar/${{ github.repository }}/blob/main/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
           fi
       
     - name: No vulnerability found
@@ -73,13 +73,14 @@ jobs:
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected in commit: ${{ github.sha }}" \
-        --body-file '/tmp/vuln_info.md' \
+        --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"
       env:
-        TRIVY_DISABLE_VEX_NOTICE: true
+        TRIVY_DISABLE_VEX_NOTICE: "CI"
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+#         --body-file '/tmp/vuln_info.md' \
 
     
     #- name: Vulnerability detected - create Issue

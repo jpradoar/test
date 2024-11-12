@@ -82,14 +82,14 @@ jobs:
         committer_name: 'AutoCommit'
 
 
-    #- name: Vulnerability detected - Create issue
-    #  if: steps.vuln_status.outputs.vuln_status == '1'
-    #  run: |
-    #    body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
-    #    gh issue --repo ${{ github.repository }} \
-    #    create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
-    #    --body-file '/tmp/vuln_info.md' \
-    #    --assignee "jpradoar" \
-    #    --label bug --label "help wanted"
-    #  env:
-    #    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Vulnerability detected - Create issue
+      if: steps.vuln_status.outputs.vuln_status == '1'
+      run: |
+        body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
+        gh issue --repo ${{ github.repository }} \
+        create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
+        --body-file '/tmp/vuln_info.md' \
+        --assignee "jpradoar" \
+        --label bug --label "help wanted"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

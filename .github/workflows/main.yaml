@@ -50,10 +50,13 @@ jobs:
             echo "::set-output name=vuln_status::0"
           else
             echo "::set-output name=vuln_status::1"
-            echo "### See detailed vuln scan in: " > /tmp/vuln_info.md
-            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/jpradoar/${{ github.repository }}/blob/main/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
+            echo "### See detailed vuln scan in: " >> ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/jpradoar/${{ github.repository }}/blob/main/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
           fi
-      
+
+#            echo "### See detailed vuln scan in: " > /tmp/vuln_info.md
+#            echo "[vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/jpradoar/${{ github.repository }}/blob/main/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
+  
     - name: No vulnerability found
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |
@@ -72,12 +75,13 @@ jobs:
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
-        create --title "Vulnerability detected in commit: ${{ github.sha }}" \
+        create --title "Vulnerability detected on image ${{ env.REPO_APP }}" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
         --assignee "jpradoar" \
         --label bug --label "help wanted"
       env:
-        TRIVY_DISABLE_VEX_NOTICE: "CI"
+        CI: true
+        TRIVY_DISABLE_VEX_NOTICE: " "
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #         --body-file '/tmp/vuln_info.md' \

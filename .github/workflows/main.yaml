@@ -10,7 +10,7 @@ env:
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
   COMMITER_NAME: 'AutoCommit'
-  VULN_SEVERITY: 'CRITICAL,HIGH'
+  VULN_SEVERITY: 'CRITICAL'
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
@@ -57,11 +57,18 @@ jobs:
       run: |
         echo "Espero un 0.  No hay vulnerabilidades"
 
-    
-    - name: Vulnerability detected - create Issue
+
+    - uses: EndBug/add-and-commit@v9
+      with:
+        message: 'AutoCommit: Add vuln file'
+        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+        committer_name: 'AutoCommit'
+
+
+    - name: Vulnerability detected - Create issue
       if: steps.vuln_status.outputs.vuln_status == '1'
       run: |
-        body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
+        body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue --repo ${{ github.repository }} \
         create --title "Vulnerability detected in commit: ${{ github.sha }}" \
         --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
@@ -69,3 +76,16 @@ jobs:
         --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    
+    #- name: Vulnerability detected - create Issue
+    #  if: steps.vuln_status.outputs.vuln_status == '1'
+    #  run: |
+    #    body=$(cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)
+    #    gh issue --repo ${{ github.repository }} \
+    #    create --title "Vulnerability detected in commit: ${{ github.sha }}" \
+    #    --body-file './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
+    #    --assignee "jpradoar" \
+    #    --label bug --label "help wanted"
+    #  env:
+    #    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

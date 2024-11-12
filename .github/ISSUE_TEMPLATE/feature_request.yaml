@@ -1,9 +1,21 @@
 ---
 name: 🚀 Feature Request
 description: Suggest an idea or improvement to our product
-title: "🚀 [Feat]: "
+title: "🚀 [Feat]: ..."
 labels: ["enhancement"]
+---
+
 body:
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: yourmail@example.com
+    validations:
+      required: false
+
   - type: markdown
     attributes:
       value: >
@@ -33,3 +45,24 @@ body:
           ... Add your suggested solution description here.
     validations:
       required: false
+
+  - type: dropdown
+    id: interested
+    attributes:
+      label: This feature is interested for
+      multiple: true
+      options:
+        - Just for me
+        - Maybe for everyone
+        - For the product
+
+  - type: dropdown
+    id: user_owned
+    attributes:
+      label: Can you participate developing this feat? 
+      multiple: false
+      options:
+        - Yes, of course!
+        - yes, but i dont have all skills
+        - Yes, but I dont have a lot of time
+        - No, im sorry

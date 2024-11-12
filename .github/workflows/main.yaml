@@ -6,6 +6,7 @@ on:
 
 env:
   REPO_APP: 'demo-app'
+  ASSOCIATED_PROJECT: 'projects/1'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
@@ -17,7 +18,8 @@ env:
   VULN_EXIT_CODE: 0 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   TRIVY_DISABLE_VEX_NOTICE: true
-  
+
+
 jobs:
   Demo-job-test:
     runs-on: ubuntu-latest 
@@ -86,10 +88,12 @@ jobs:
       if: steps.vuln_status.outputs.vuln_status == '1'
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
-        gh issue --repo ${{ github.repository }} \
-        create --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
+        gh issue create \
+        --repo ${{ github.repository }} \
+        --title ":skull: vulnerability detected on image ${{ env.REPO_APP }} " \
         --body-file '/tmp/vuln_info.md' \
         --assignee "jpradoar" \
         --label bug --label vulnerability
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         --project ${{ env.ASSOCIATED_PROJECT }}

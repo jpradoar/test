@@ -6,21 +6,13 @@ labels: ["enhancement"]
 
 body:
 
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: yourmail@example.com
-    validations:
-      required: false
-
   - type: markdown
     attributes:
       value: >
         **Thanks :heart: for taking the time to fill out this feature request report!** Please, first try to search to see if a similar issue or if [already exists](https://github.com/jpradoar/event-driven-architecture/issues?q=is%3Aopen+is%3Aissue) for
         your feature.
-
+        > [!IMPORTANT]
+        > Try to explain it as much as you can
         we are open to accept any contribution from users or enthusiast. For more info please see
         [here](https://github.com/jpradoar/event-driven-architecture/blob/master/CONTRIBUTING.md).
 
@@ -65,3 +57,12 @@ body:
         - yes, but i dont have all skills
         - Yes, but I dont have a lot of time
         - No, im sorry
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: yourmail@example.com
+    validations:
+      required: false

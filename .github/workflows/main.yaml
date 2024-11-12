@@ -78,7 +78,7 @@ jobs:
         --label bug --label "help wanted"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TRIVY_DISABLE_VEX_NOTICE: true
+        TRIVY_DISABLE_VEX_NOTICE: "true"
 
     
     #- name: Vulnerability detected - create Issue

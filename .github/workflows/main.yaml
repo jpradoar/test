@@ -2,7 +2,8 @@ name: main-test
 on:
   push:
     branches:
-      - main
+      - disabled
+      #- main
 
 env:
   REPO_APP: 'demo-app'

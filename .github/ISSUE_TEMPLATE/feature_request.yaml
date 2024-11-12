@@ -22,7 +22,7 @@ body:
       description: |
         A clear and concise description of the feature you're interested in...
       value: |
-         ... Add your feature description here :D 
+         <!--- ... Add your feature description here :D --->
     validations:
       required: true
 
@@ -33,7 +33,7 @@ body:
         Describe the solution you'd like. A clear and concise description of what you want to happen. If you have
         considered alternatives, please describe them.
       value: |
-          ... Add your suggested solution description here.
+          <!-- ... Add your suggested solution description here. -->
     validations:
       required: false
 

@@ -35,6 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    # THIS ACTIONS IS COMMENTED BECAUSE HAS A BUG 
     # - name: search for vulnerabilities
     #   uses: aquasecurity/trivy-action@0.28.0
     #   with:
@@ -61,48 +62,38 @@ jobs:
         sudo apt-get install -y trivy
 
     - name: search for vulnerabilities
+      id: trivy_exit_code
       run: |
-        trivy image -q \
+        trivy image \
         --security-checks ${{ env.VULN_SCANNERS }} \
         --scanners ${{ env.VULN_SCANNERS }} \
         --severity ${{ env.VULN_SEVERITY }} \
         --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
         --vuln-type ${{ env.VULN_TYPE }} \
         --format ${{ env.VULN_FORMAT }} \
+        --exit-code 1 \
         jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
 
     - name: validate if exist vuln
-      id: vuln_status
+      if: steps.vuln_status.outputs.trivy_exit_code == '1'
       run: |
-          if grep -q 'Total: 0' ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif; then
-            echo "::set-output name=vuln_status::0"
-          else
-            echo "::set-output name=vuln_status::1"
-            echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
-            echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
-            echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
-            echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
-          fi
+        echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
+        echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
+        echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
+        echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
 
 
     - name: cat /tmp/vuln_info.md
-      if: steps.vuln_status.outputs.vuln_status == '1'
+      if: steps.vuln_status.outputs.trivy_exit_code == '1'
       run: cat /tmp/vuln_info.md
 
     - name: cat vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-      if: steps.vuln_status.outputs.vuln_status == '1'
+      if: steps.vuln_status.outputs.trivy_exit_code == '1'
       run:  cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
-
-    - name: No vulnerability found
-      if: steps.vuln_status.outputs.vuln_status == '0'
-      run: |
-        echo "Espero un 0.  No hay vulnerabilidades"
-
-
     - uses: EndBug/add-and-commit@v9
-      if: steps.vuln_status.outputs.vuln_status == '1'
+      if: steps.vuln_status.outputs.trivy_exit_code == '1'
       with:
         message: 'AutoCommit: Add vuln file'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
@@ -110,7 +101,7 @@ jobs:
 
 
     - name: Vulnerability detected - Create issue
-      if: steps.vuln_status.outputs.vuln_status == '1'
+      if: steps.vuln_status.outputs.trivy_exit_code == '1'
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue create \

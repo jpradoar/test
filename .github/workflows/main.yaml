@@ -71,7 +71,6 @@ jobs:
       run:  cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
 
-
     - name: No vulnerability found
       if: steps.vuln_status.outputs.vuln_status == '0'
       run: |

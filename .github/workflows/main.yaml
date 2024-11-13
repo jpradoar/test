@@ -75,13 +75,16 @@ jobs:
             --format ${{ env.VULN_FORMAT }} \
             --exit-code 1 \
             jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-          export TRIVY_EXIT_CODE=$?  # Guarda el código de salida
-          set -e  # Reactiva el modo de salida en error inmediato
 
-
-    - name: validate if exist vuln
+    - name: cat file 
       run: |
         cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+
+    - name: cat file 2
+      if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
+      run: |
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+
 
     - name: validate if exist vuln
       if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}

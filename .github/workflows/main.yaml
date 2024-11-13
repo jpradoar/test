@@ -80,6 +80,10 @@ jobs:
 
 
     - name: validate if exist vuln
+      run: |
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+
+    - name: validate if exist vuln
       if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
       run: |
         echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md

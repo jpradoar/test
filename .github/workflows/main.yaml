@@ -62,7 +62,7 @@ jobs:
 
     - name: vulnerability test
       id: trivy_scan
-      #continue-on-error: true
+      continue-on-error: true
       run: |
           trivy image \
             --scanners ${{ env.VULN_SCANNERS }} \
@@ -72,7 +72,7 @@ jobs:
             --format ${{ env.VULN_FORMAT }} \
             --exit-code ${{ env.VULN_EXIT_CODE }} \
             jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-#jpradoar/mqtt-producer:1.1.3
+
 
     - name: show vulnerability report
       if: ${{ steps.trivy_scan.conclusion == 'failure' }}

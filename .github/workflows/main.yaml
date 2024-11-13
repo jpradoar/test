@@ -52,6 +52,13 @@ jobs:
     #     TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
     #     TRIVY_DB_REPOSITORY: ${{ env.TRIVY_REPO }} #"public.ecr.aws/aquasecurity/trivy-db:2"
 
+    - name: Install trivy
+      run: |
+        sudo apt-get install wget gnupg
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+        echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install -y trivy
 
     - name: search for vulnerabilities
       run: |

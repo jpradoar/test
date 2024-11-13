@@ -44,8 +44,8 @@ jobs:
         severity: ${{ env.VULN_SEVERITY }}
         timeout: ${{ env.VULN_TIMEOUT_SCAN }}
         output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        exit-code: 
         hide-progress: true
+        exit-code: ${{ env.VULN_EXIT_CODE }}
       env:
         TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
 

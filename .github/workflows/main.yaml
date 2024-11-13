@@ -55,7 +55,7 @@ jobs:
       env:
         TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
         TRIVY_INSECURE: true
-        #TRIVY_SKIP_DB_UPDATE: true
+        TRIVY_SKIP_DB_UPDATE: true
 
 
     - name: validate if exist vuln

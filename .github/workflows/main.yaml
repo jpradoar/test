@@ -61,7 +61,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y trivy
 
-    - name: search for vulnerabilities
+    - name: vulnerability detection
       id: trivy_scan
       #continue-on-error: true
       run: |
@@ -75,22 +75,6 @@ jobs:
             --format ${{ env.VULN_FORMAT }} \
             --exit-code ${{ env.VULN_EXIT_CODE }} \
             jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-
-    - name: cat file 
-      run: |
-        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-
-    - name: cat file conclusion
-      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
-      run: |
-        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-
-    - name: cat file output
-      if: ${{ steps.trivy_scan.output == 1 }}
-      run: |
-        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-
-
 
 
     - name: validate if exist vuln

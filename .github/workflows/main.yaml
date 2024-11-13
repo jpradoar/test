@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  REPO_APP: 'alpine-latest'
+  REPO_APP: 'mqtt-producer'
   ASSOCIATED_PROJECT: 'projects/1'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
@@ -71,7 +71,7 @@ jobs:
             --pkg-types ${{ env.VULN_TYPE }} \
             --format ${{ env.VULN_FORMAT }} \
             --exit-code ${{ env.VULN_EXIT_CODE }} \
-            alpine:latest > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+            jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 #jpradoar/mqtt-producer:1.1.3
 
     - name: show vulnerability report

@@ -70,9 +70,11 @@ jobs:
 
 
     - name: cat /tmp/vuln_info.md
+      if: steps.vuln_status.outputs.vuln_status == '1'
       run: cat /tmp/vuln_info.md
 
     - name: cat vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
+      if: steps.vuln_status.outputs.vuln_status == '1'
       run:  cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
 
@@ -83,6 +85,7 @@ jobs:
 
 
     - uses: EndBug/add-and-commit@v9
+      if: steps.vuln_status.outputs.vuln_status == '1'
       with:
         message: 'AutoCommit: Add vuln file'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'

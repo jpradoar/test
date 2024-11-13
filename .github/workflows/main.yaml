@@ -20,6 +20,8 @@ env:
   VULN_EXIT_CODE: 0 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   TRIVY_DISABLE_VEX_NOTICE: true
+  TRIVY_VERSION: 'v0.56.1'
+  TRIVY_CACHE: false
 
 
 jobs:
@@ -48,7 +50,8 @@ jobs:
         hide-progress: true
         exit-code: ${{ env.VULN_EXIT_CODE }}
         scanners: ${{ env.VULN_SCANNERS }}
-        cache: 'false'
+        cache: ${{ env.TRIVY_CACHE }}
+        version: ${{ env.TRIVY_VERSION }}
       env:
         TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
         TRIVY_INSECURE: true

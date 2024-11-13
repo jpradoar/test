@@ -62,21 +62,25 @@ jobs:
         sudo apt-get install -y trivy
 
     - name: search for vulnerabilities
-      id: trivy_exit_code
+      id: trivy_scan
+      continue-on-error: true 
       run: |
-        trivy image \
-        --security-checks ${{ env.VULN_SCANNERS }} \
-        --scanners ${{ env.VULN_SCANNERS }} \
-        --severity ${{ env.VULN_SEVERITY }} \
-        --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
-        --vuln-type ${{ env.VULN_TYPE }} \
-        --format ${{ env.VULN_FORMAT }} \
-        --exit-code 1 \
-        jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+          set +e  # Desactiva el modo de salida en error inmediato
+          trivy image \
+            --security-checks ${{ env.VULN_SCANNERS }} \
+            --scanners ${{ env.VULN_SCANNERS }} \
+            --severity ${{ env.VULN_SEVERITY }} \
+            --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
+            --vuln-type ${{ env.VULN_TYPE }} \
+            --format ${{ env.VULN_FORMAT }} \
+            --exit-code 1 \
+            jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+          export TRIVY_EXIT_CODE=$?  # Guarda el código de salida
+          set -e  # Reactiva el modo de salida en error inmediato
 
 
     - name: validate if exist vuln
-      if: steps.vuln_status.outputs.trivy_exit_code == '1'
+      if: steps.trivy_scan.outputs.TRIVY_EXIT_CODE == '1'
       run: |
         echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
         echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
@@ -85,15 +89,15 @@ jobs:
 
 
     - name: cat /tmp/vuln_info.md
-      if: steps.vuln_status.outputs.trivy_exit_code == '1'
+      if: steps.trivy_scan.outputs.TRIVY_EXIT_CODE == '1'
       run: cat /tmp/vuln_info.md
 
     - name: cat vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-      if: steps.vuln_status.outputs.trivy_exit_code == '1'
+      if: steps.trivy_scan.outputs.TRIVY_EXIT_CODE == '1'
       run:  cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
     - uses: EndBug/add-and-commit@v9
-      if: steps.vuln_status.outputs.trivy_exit_code == '1'
+      if: steps.trivy_scan.outputs.TRIVY_EXIT_CODE == '1'
       with:
         message: 'AutoCommit: Add vuln file'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
@@ -101,7 +105,7 @@ jobs:
 
 
     - name: Vulnerability detected - Create issue
-      if: steps.vuln_status.outputs.trivy_exit_code == '1'
+      if: steps.trivy_scan.outputs.TRIVY_EXIT_CODE == '1'
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue create \

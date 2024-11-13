@@ -12,7 +12,7 @@ env:
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
   COMMITER_NAME: 'AutoCommit'
-  VULN_SEVERITY: 'CRITICAL,HIGH'
+  VULN_SEVERITY: 'CRITICAL'
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
@@ -61,7 +61,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y trivy
 
-    - name: vulnerability detection
+    - name: vulnerability test
       id: trivy_scan
       #continue-on-error: true
       run: |
@@ -84,22 +84,6 @@ jobs:
         echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
         echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
         echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
-
-
-    - name: cat /tmp/vuln_info.md
-      if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
-      run: cat /tmp/vuln_info.md
-
-    - name: cat vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-      if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
-      run:  cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
-
-    - uses: EndBug/add-and-commit@v9
-      if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
-      with:
-        message: 'AutoCommit: Add vuln file'
-        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        committer_name: 'AutoCommit'
 
 
     - name: Vulnerability detected - Create issue

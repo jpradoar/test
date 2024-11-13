@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  REPO_APP: 'mqtt-producer'
+  REPO_APP: 'k8s-event-exporter'
   ASSOCIATED_PROJECT: 'projects/1'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'

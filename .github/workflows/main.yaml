@@ -20,7 +20,7 @@ env:
   VULN_EXIT_CODE: 0 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   TRIVY_DISABLE_VEX_NOTICE: true
-  TRIVY_REPO: 'public.ecr.aws/aquasecurity/trivy-db:v1-2023021412'
+  TRIVY_REPO: 'public.ecr.aws/aquasecurity/trivy-db:latest'
 
 jobs:
   Demo-job-test:

@@ -88,6 +88,11 @@ jobs:
         echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif)"  >> /tmp/vuln_info.md
         echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
 
+    - uses: EndBug/add-and-commit@v9
+      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
+      with:
+        message: 'AutoCommit: upload vuln scan report'
+        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
     - name: Vulnerability detected - Create issue
       if: ${{ steps.trivy_scan.conclusion == 'failure' }}

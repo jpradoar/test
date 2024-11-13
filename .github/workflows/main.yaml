@@ -5,6 +5,7 @@ on:
       - disabled
       - main
 
+
 env:
   REPO_APP: 'mqtt-producer-test'
   ASSOCIATED_PROJECT: 'projects/1'

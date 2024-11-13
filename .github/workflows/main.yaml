@@ -48,6 +48,7 @@ jobs:
         hide-progress: true
         exit-code: ${{ env.VULN_EXIT_CODE }}
         scanners: ${{ env.VULN_SCANNERS }}
+        cache: 'false'
       env:
         TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
         TRIVY_INSECURE: true

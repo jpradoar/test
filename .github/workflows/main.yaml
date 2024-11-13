@@ -62,8 +62,7 @@ jobs:
         --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
         --vuln-type ${{ env.VULN_TYPE }} \
         --format ${{ env.VULN_FORMAT }} \
-        --output './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
-        jpradoar/mqtt-producer:1.1.3
+        jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
 
     - name: validate if exist vuln

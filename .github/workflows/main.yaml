@@ -35,22 +35,35 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    # - name: search for vulnerabilities
+    #   uses: aquasecurity/trivy-action@0.28.0
+    #   with:
+    #     image-ref: 'jpradoar/mqtt-producer:1.1.3'
+    #     #image-ref: 'alpine:latest'
+    #     format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
+    #     vuln-type: ${{ env.VULN_TYPE }}
+    #     severity: ${{ env.VULN_SEVERITY }}
+    #     timeout: ${{ env.VULN_TIMEOUT_SCAN }}
+    #     output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+    #     hide-progress: true
+    #     exit-code: ${{ env.VULN_EXIT_CODE }}
+    #     scanners: ${{ env.VULN_SCANNERS }}
+    #   env:
+    #     TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
+    #     TRIVY_DB_REPOSITORY: ${{ env.TRIVY_REPO }} #"public.ecr.aws/aquasecurity/trivy-db:2"
+
+
     - name: search for vulnerabilities
-      uses: aquasecurity/trivy-action@0.28.0
-      with:
-        image-ref: 'jpradoar/mqtt-producer:1.1.3'
-        #image-ref: 'alpine:latest'
-        format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
-        vuln-type: ${{ env.VULN_TYPE }}
-        severity: ${{ env.VULN_SEVERITY }}
-        timeout: ${{ env.VULN_TIMEOUT_SCAN }}
-        output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
-        hide-progress: true
-        exit-code: ${{ env.VULN_EXIT_CODE }}
-        scanners: ${{ env.VULN_SCANNERS }}
-      env:
-        TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
-        TRIVY_DB_REPOSITORY: ${{ env.TRIVY_REPO }} #"public.ecr.aws/aquasecurity/trivy-db:2"
+      run: |
+        trivy image -q \
+        --security-checks ${{ env.VULN_SCANNERS }} \
+        --scanners ${{ env.VULN_SCANNERS }} \
+        --severity ${{ env.VULN_SEVERITY }} \
+        --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
+        --vuln-type ${{ env.VULN_TYPE }} \
+        --format ${{ env.VULN_FORMAT }} \
+        --output './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif' \
+        jpradoar/mqtt-producer:1.1.3
 
 
     - name: validate if exist vuln

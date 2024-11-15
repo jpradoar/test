@@ -19,7 +19,7 @@ env:
   VULN_TIMEOUT_SCAN: '2m0s'
   VULN_SCANNERS: 'vuln,secret,misconfig,license'
   VULN_IGNORED_LIC: 'MIT' # MIT,LGPL,MPL-2.0
-  VULN_EXIT_CODE: 0 # 0=pipeline continue  1=pipeline finish. 
+  VULN_EXIT_CODE: 1 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   TRIVY_DISABLE_VEX_NOTICE: true
 

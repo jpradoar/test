@@ -55,9 +55,9 @@ jobs:
     #     TRIVY_DB_REPOSITORY: ${{ env.TRIVY_REPO }} #"public.ecr.aws/aquasecurity/trivy-db:2"
 
 
-    - name: Install trivy
+    - name: test
       run: |
-         sudo apt-get update; sudo apt-get install docker.io -y 
+         docker ps -a
     #- name: Install trivy
     #  run: |
     #    sudo apt-get install wget gnupg

@@ -70,7 +70,7 @@ jobs:
       id: trivy_scan
       #continue-on-error: true
       run: |
-          docker run -it -e "TRIVY_DB_REPOSITORY=public.ecr.aws/aquasecurity/trivy-db" \
+          docker run -t -e "TRIVY_DB_REPOSITORY=public.ecr.aws/aquasecurity/trivy-db" \
           aquasec/trivy:0.57.0 image \
           --scanners vuln,misconfig,secret,license \
           --severity CRITICAL \

@@ -75,14 +75,12 @@ jobs:
 
 
     - name: show vulnerability report
-      continue-on-error: true
-      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
       run: |
         cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
     - name: validate if exist vuln
-      continue-on-error: true
-      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
       run: |
         echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
         echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
@@ -90,16 +88,14 @@ jobs:
         echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
 
     - name: Upload vuln scan report 
-      continue-on-error: true
       uses: EndBug/add-and-commit@v9
-      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
       with:
         message: 'AutoCommit: upload vuln scan report'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
     - name: Vulnerability detected - Create issue
-      continue-on-error: true
-      if: ${{ steps.trivy_scan.conclusion == 'failure' }}
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
       run: |
         body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif" 
         gh issue create \

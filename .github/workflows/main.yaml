@@ -74,7 +74,11 @@ jobs:
           jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
           echo "TRIVY_EXIT_CODE=$?" >> $GITHUB_ENV
 
-
+    - name: show TRIVY_EXIT_CODE
+      run: |
+          echo $TRIVY_EXIT_CODE
+          echo ${{ env.TRIVY_EXIT_CODE }}
+          
     - name: show vulnerability report
       if: ${{ env.TRIVY_EXIT_CODE == 1 }}
       run: |

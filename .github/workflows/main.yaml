@@ -7,7 +7,7 @@ on:
 
 
 env:
-  REPO_APP: 'aaa_2'
+  REPO_APP: 'aaa_1'
   ASSOCIATED_PROJECT: 'projects/1'
   SLACK_CHANNEL: 'builds-and-ci'
   SLACK_MSG_COLOR: '#0092ff'
@@ -89,7 +89,7 @@ jobs:
 
     - name: Upload vuln scan report 
       uses: EndBug/add-and-commit@v9
-      if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      #if: ${{ steps.trivy_scan.outcome == 'failure' }}
       with:
         message: 'AutoCommit: upload vuln scan report'
         add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'

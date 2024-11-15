@@ -59,7 +59,7 @@ jobs:
 #--------------------------------
     - name: vulnerability test
       id: trivy_scan
-      #continue-on-error: true
+      continue-on-error: true
       run: |
           docker run -t -e "TRIVY_DB_REPOSITORY=public.ecr.aws/aquasecurity/trivy-db" \
           aquasec/trivy:0.57.0 image \

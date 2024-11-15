@@ -72,18 +72,14 @@ jobs:
           --ignored-licenses MIT \
           --format table \
           --exit-code  ${{ env.VULN_EXIT_CODE }} \
-          -o /data/${{ env.REPO_APP }}_vuln_scan.sarif
+          -o /data/${{ env.REPO_APP }}_vuln_scan.sarif \
           jpradoar/mqtt-producer:1.1.3  
-          echo "TRIVY_EXIT_CODE=$?" >> $GITHUB_ENV
           cp /tmp/output/${{ env.REPO_APP }}_vuln_scan.sarif ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
-    - name: show TRIVY_EXIT_CODE
-      run: |
-          echo $TRIVY_EXIT_CODE
-          echo ${{ env.TRIVY_EXIT_CODE }}
-          
+
     - name: show vulnerability report
-      if: ${{ env.TRIVY_EXIT_CODE == 1 }}
+      #if: ${{ env.TRIVY_EXIT_CODE == 1 }}
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
       run: |
         cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 

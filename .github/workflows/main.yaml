@@ -64,7 +64,7 @@ jobs:
           docker run -t -e "TRIVY_DB_REPOSITORY=public.ecr.aws/aquasecurity/trivy-db" \
           aquasec/trivy:0.57.0 image \
           --scanners vuln,misconfig,secret,license \
-          --severity CRITICAL \
+          --severity CRITICAL,HIGH \
           --timeout 2m0s \
           --pkg-types os,library \
           --license-full \
@@ -72,6 +72,10 @@ jobs:
           --format table \
           --exit-code 1 \
           jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
+
+    - name: show vulnerability report (ALWAYS)
+      run: |
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
     - name: show vulnerability report
       if: ${{ steps.trivy_scan.conclusion == 'failure' }}

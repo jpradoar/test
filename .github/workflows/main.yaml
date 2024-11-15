@@ -73,9 +73,6 @@ jobs:
           --exit-code 1 \
           jpradoar/mqtt-producer:1.1.3 > './vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif'
 
-    - name: show vulnerability report (ALWAYS)
-      run: |
-        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
 
     - name: show vulnerability report
       if: ${{ failure() && steps.trivy_scan.conclusion == 'failure' }}
@@ -110,3 +107,7 @@ jobs:
 #        --project ${{ env.ASSOCIATED_PROJECT }}
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: show vulnerability report (ALWAYS)
+      run: |
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif

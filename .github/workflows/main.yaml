@@ -13,7 +13,7 @@ env:
   SLACK_MSG_COLOR: '#0092ff'
   BUILD_CONTEXT: './none'
   COMMITER_NAME: 'AutoCommit'
-  VULN_SEVERITY: CRITICAL,HIGH
+  VULN_SEVERITY: 'CRITICAL,HIGH'
   VULN_TYPE: 'os,library'
   VULN_FORMAT: 'table' 
   VULN_TIMEOUT_SCAN: '2m0s'
@@ -22,6 +22,7 @@ env:
   VULN_EXIT_CODE: 1 # 0=pipeline continue  1=pipeline finish. 
   VULN_SCAN_SEND_SECURITY_TAB: false # false: only commit vuln-scan |   # true: no commit vuln-scan but send output to Github Security tab
   TRIVY_DISABLE_VEX_NOTICE: true
+  TRIVY_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
 
 jobs:
   Demo-job-test:
@@ -75,17 +76,17 @@ jobs:
       run: |
         rm -rf ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif
         trivy image \
-        --scanners ${{ env.VULN_SCANNERS }} \
-        --severity ${{ env.VULN_SEVERITY }} \
-        --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
-        --pkg-types ${{ env.VULN_TYPE }} \
-        --license-full \
-        --ignored-licenses ${{ env.VULN_IGNORED_LIC }} \
-        --format ${{ env.VULN_FORMAT }} \
-        --exit-code ${{ env.VULN_EXIT_CODE }} \
-        --db-repository ${{ env.TRIVY_REPOSITORY }} \
-        --ignore-unfixed \
-        -o ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif \
+         --scanners ${{ env.VULN_SCANNERS }} \
+         --severity ${{ env.VULN_SEVERITY }} \
+         --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
+         --pkg-types ${{ env.VULN_TYPE }} \
+         --license-full \
+         --ignored-licenses ${{ env.VULN_IGNORED_LIC }} \
+         --format ${{ env.VULN_FORMAT }} \
+         --exit-code ${{ env.VULN_EXIT_CODE }} \
+         --db-repository ${{ env.TRIVY_REPOSITORY }} \
+         --ignore-unfixed \
+         -o ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.sarif \
         jpradoar/mqtt-producer:1.1.3
 
 

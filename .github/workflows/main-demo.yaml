@@ -1,0 +1,120 @@
+name: main-test
+on:
+  push:
+    branches:
+      - disabled
+      - main
+
+
+env:
+  REPO_APP: 'aaa_2'
+  ASSOCIATED_PROJECT: 'projects/1'
+  SLACK_CHANNEL: 'builds-and-ci'
+  SLACK_MSG_COLOR: '#0092ff'
+  BUILD_CONTEXT: './none'
+  COMMITER_NAME: 'AutoCommit'
+  VULN_SEVERITY: 'CRITICAL,HIGH'
+  VULN_TYPE: 'os,library'
+  VULN_FORMAT: 'table' 
+  VULN_TIMEOUT_SCAN: '2m0s'
+  VULN_SCANNERS: 'vuln,secret,misconfig,license'
+  VULN_IGNORED_LIC: 'MIT' # MIT,LGPL,MPL-2.0
+  VULN_EXIT_CODE: 1 # 0=pipeline continue  1=pipeline finish. 
+  TRIVY_DISABLE_VEX_NOTICE: true
+  TRIVY_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
+
+jobs:
+  Demo-job-test:
+    runs-on: ubuntu-latest 
+    permissions:
+      contents: write # get the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status  
+      issues: write # to create new issues in workflows
+      
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    # THIS ACTIONS IS COMMENTED BECAUSE HAS A BUG 
+    #- name: search for vulnerabilities
+    #  uses: aquasecurity/trivy-action@0.28.0
+    #  with:
+    #     image-ref: 'jpradoar/mqtt-producer:1.1.3'
+    #     #image-ref: 'alpine:latest'
+    #     #format: ${{ env.VULN_SCAN_SEND_SECURITY_TAB == 'false' && 'table' || 'sarif' }}
+    #     format: 'table'
+    #     vuln-type: ${{ env.VULN_TYPE }}
+    #     severity: ${{ env.VULN_SEVERITY }}
+    #     timeout: ${{ env.VULN_TIMEOUT_SCAN }}
+    #     output: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.table'
+    #     hide-progress: false
+    #     exit-code: ${{ env.VULN_EXIT_CODE }}
+    #     scanners: ${{ env.VULN_SCANNERS }}
+    #  env:
+    #     TRIVY_DISABLE_VEX_NOTICE: ${{ env.TRIVY_DISABLE_VEX_NOTICE }}
+    #     TRIVY_DB_REPOSITORY: "public.ecr.aws/aquasecurity/trivy-db:2"
+
+    - name: Install trivy
+      run: |
+          sudo apt-get install wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install trivy
+
+
+    - name: search for vulnerabilities
+      id: trivy_scan
+      continue-on-error: true
+      run: |
+        rm -rf ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table
+        trivy image \
+         --scanners ${{ env.VULN_SCANNERS }} \
+         --severity ${{ env.VULN_SEVERITY }} \
+         --timeout ${{ env.VULN_TIMEOUT_SCAN }} \
+         --pkg-types ${{ env.VULN_TYPE }} \
+         --license-full \
+         --ignored-licenses ${{ env.VULN_IGNORED_LIC }} \
+         --format ${{ env.VULN_FORMAT }} \
+         --exit-code ${{ env.VULN_EXIT_CODE }} \
+         --db-repository ${{ env.TRIVY_REPOSITORY }} \
+         --ignore-unfixed \
+         -o ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table \
+        jpradoar/mqtt-producer:1.1.3
+
+
+    - name: show vulnerability report
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      run: |
+        cat ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table
+
+    - name: validate if exist vuln
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      run: |
+        echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
+        echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
+        echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.table)"  >> /tmp/vuln_info.md
+        echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
+
+    - name: Upload vuln scan report 
+      uses: EndBug/add-and-commit@v9
+      #if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      with:
+        message: 'AutoCommit: upload vuln scan report'
+        add: './vuln_scans/${{ env.REPO_APP }}_vuln_scan.table'
+
+    - name: Vulnerability detected - Create issue
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      run: |
+        body="New vulnerability detected on vuln_scans/${{ env.REPO_APP }}_vuln_scan.table" 
+        gh issue create \
+        --repo ${{ github.repository }} \
+        --title ":skull: [vuln] vulnerability detected on image ${{ env.REPO_APP }} " \
+        --body-file '/tmp/vuln_info.md' \
+        --assignee "jpradoar" \
+        --label bug --label vulnerability
+#        --project ${{ env.ASSOCIATED_PROJECT }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

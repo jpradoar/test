@@ -1,0 +1,101 @@
+{
+  "vhosts": [
+    { "name": "/" }
+  ],
+  "exchanges": [
+    { "name": "infra", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "clientes", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "deployments", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "commands", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "messages", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "event-audit", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-infra", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-clientes", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-deployments", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-commands", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-messages", "vhost": "/", "type": "direct", "durable": true },
+    { "name": "dlx-event-audit", "vhost": "/", "type": "direct", "durable": true }
+  ],
+  "queues": [
+    { 
+      "name": "infra", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-infra" }
+    },
+    { 
+      "name": "clientes", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-clientes" }
+    },
+    { 
+      "name": "deployments", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-deployments" }
+    },
+    { 
+      "name": "commands", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-commands" }
+    },
+    { 
+      "name": "messages", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-messages" }
+    },
+    { 
+      "name": "event-audit", 
+      "vhost": "/", 
+      "durable": true,
+      "arguments": { "x-dead-letter-exchange": "dlx-event-audit" }
+    },
+    { 
+      "name": "dlq-infra", 
+      "vhost": "/", 
+      "durable": true
+    },
+    { 
+      "name": "dlq-clientes", 
+      "vhost": "/", 
+      "durable": true
+    },
+    { 
+      "name": "dlq-deployments", 
+      "vhost": "/", 
+      "durable": true
+    },
+    { 
+      "name": "dlq-commands", 
+      "vhost": "/", 
+      "durable": true
+    },
+    { 
+      "name": "dlq-messages", 
+      "vhost": "/", 
+      "durable": true
+    },
+    { 
+      "name": "dlq-event-audit", 
+      "vhost": "/", 
+      "durable": true
+    }
+  ],
+  "bindings": [
+    { "source": "infra", "vhost": "/", "destination": "infra", "destination_type": "queue", "routing_key": "infra" },
+    { "source": "clientes", "vhost": "/", "destination": "clientes", "destination_type": "queue", "routing_key": "clientes" },
+    { "source": "deployments", "vhost": "/", "destination": "deployments", "destination_type": "queue", "routing_key": "deployments" },
+    { "source": "commands", "vhost": "/", "destination": "commands", "destination_type": "queue", "routing_key": "commands" },
+    { "source": "messages", "vhost": "/", "destination": "messages", "destination_type": "queue", "routing_key": "messages" },
+    { "source": "event-audit", "vhost": "/", "destination": "event-audit", "destination_type": "queue", "routing_key": "event-audit" },
+    { "source": "dlx-infra", "vhost": "/", "destination": "dlq-infra", "destination_type": "queue", "routing_key": "dlq-infra" },
+    { "source": "dlx-clientes", "vhost": "/", "destination": "dlq-clientes", "destination_type": "queue", "routing_key": "dlq-clientes" },
+    { "source": "dlx-deployments", "vhost": "/", "destination": "dlq-deployments", "destination_type": "queue", "routing_key": "dlq-deployments" },
+    { "source": "dlx-commands", "vhost": "/", "destination": "dlq-commands", "destination_type": "queue", "routing_key": "dlq-commands" },
+    { "source": "dlx-messages", "vhost": "/", "destination": "dlq-messages", "destination_type": "queue", "routing_key": "dlq-messages" },
+    { "source": "dlx-event-audit", "vhost": "/", "destination": "dlq-event-audit", "destination_type": "queue", "routing_key": "dlq-event-audit" }
+  ]
+}

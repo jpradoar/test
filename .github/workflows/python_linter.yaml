@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'demo_test/**'
+      - '.github/workflows/python_linter.yaml'
   
 jobs:
   liner_python_files:

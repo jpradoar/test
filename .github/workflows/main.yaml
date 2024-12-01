@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - disabled
-      - main
+      #- main
 
 
 env:

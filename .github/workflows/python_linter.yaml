@@ -2,7 +2,7 @@ name: python_linter
 on:
   push:
     paths:
-      - 'demo_test/**'
+      - './demo_test/**'
       - '.github/workflows/python_linter.yaml'
   
 jobs:
@@ -14,5 +14,5 @@ jobs:
 
     - uses: astral-sh/ruff-action@v1
       with:
-         src: "demo_test"
+         src: "/emo_test/"
          args: "format --check"

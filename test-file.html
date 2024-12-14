@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://diafygi.github.io/dice-css/dice-1.0.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.0.0/mermaid.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.7.0/mermaid.js"></script>
+
+
+
+  <title>RPG Reference Tables</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .button-container {
+      margin-bottom: 20px;
+    }
+    .button-container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 16px;
+    }
+    .button-container button:hover {
+      background-color: #45a049;
+    }
+    .table-container {
+      display: none;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 800px;
+      background: white;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table caption {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    table th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    .close-button {
+      margin-top: 10px;
+      background-color: #f44336;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .close-button:hover {
+      background-color: #e53935;
+    }
+    .roll-dice-button {
+      margin-top: 10px;
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .dice-result {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+    .dice-size {
+      font-size: 2em;
+    }
+    .minus {
+      background-color: red;
+      /*background-image: url("img/heart-minus.png");*/
+    }
+    .plus {
+      background-color: green;
+    }
+    .value {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>RPG Reference Tables</h1>
+
+<div class="mermaid">
+graph LR
+    P1[Player_A1] --> PrimeraRonda_A1[Go to <a href='http://google.com'>Google</a> ]
+    P2[Player_A ] --> PrimeraRonda_A1
+</div>
+
+<div class="mermaid">
+graph LR
+    P1[Player_A1] --> PrimeraRonda_A1[Go to asd ]
+    P2[Player_A ] --> PrimeraRonda_A1
+    B-->D(fa:fa-spinner);
+</div>
+
+<table>
+    <tr>
+        <td>
+            <div>HP</div>
+            <div class="counter" data-counter="HP">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>ARMA (1d6)</div>
+            <div class="counter" data-counter="ARMA">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>YELMO</div>
+            <div class="counter" data-counter="YELMO">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>HOMBRERAS</div>
+            <div class="counter" data-counter="HOMBRERAS">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>ARMADURA</div>
+            <div class="counter" data-counter="ARMADURA">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>BRAZALES</div>
+            <div class="counter" data-counter="BRAZALES">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>AMULETOS</div>
+            <div class="counter" data-counter="AMULETOS">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>BOTAS</div>
+            <div class="counter" data-counter="BOTAS">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>ANTORCHAS</div>
+            <div class="counter" data-counter="ANTORCHAS">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>PROVISIONES</div>
+            <div class="counter" data-counter="PROVISIONES">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>MONEDAS</div>
+            <div class="counter" data-counter="MONEDAS">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+
+        <td>
+            <div>RAZA</div>
+            <select id="race-select">
+            <!-- Opciones generadas dinámicamente -->
+            </select>
+        </td>
+        <td>
+            <div>CLASE</div>
+            <select id="classes-select">
+            <!-- Opciones generadas dinámicamente -->
+            </select>
+        </td>
+        <td>
+            <div>SPELLS <select id="spells-select"></select></div>
+            <div class="counter" data-counter="SPELLS">
+                <button class="minus">-</button>
+                  [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>VARIOS 4</div>
+            <div class="counter" data-counter="VARIOS4">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+        <td>
+            <div>MONSTER HP</div>
+            <div class="counter" data-counter="MONSTERHP">
+                <button class="minus">-</button>
+                [ <span class="value">  </span> ]
+                <button class="plus">+</button>
+            </div>
+        </td>
+    </tr>
+
+</table>
+
+
+
+  <div class="button-container" id="button-container"></div>
+  <div id="table-container" class="table-container">
+    <table id="dynamic-table">
+      <caption id="table-caption"></caption>
+      <thead id="table-header"></thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <button class="close-button" onclick="closeTable()">Close</button>
+    <button class="roll-dice-button" onclick="rollDice(1, 6)">Roll 1d6</button>
+    <button class="roll-dice-button" onclick="rollDice(2, 12)">Roll 2d6</button>
+    <div id="dice-result" class="dice-result"></div>
+  </div>
+
+  <script>
+    const tables = {
+      "open-door": {
+        caption: "Open a Door",
+        headers: ["1d6", "What happens?"],
+        rows: [
+          ["1", "You activate a Trap!"],
+          ["2", "Locked"],
+          ["3", "Locked"],
+          ["4", "Unlocked"],
+          ["5", "Unlocked"],
+          ["6", "Unlocked"],
+        ]
+      },
+      "Segments": {
+        caption: "Segments",
+        headers: ["1d6", "Open from a Staircase", "Open from a Corridor", "Open from a Room"],
+        rows: [
+          ["1", "Corridor with another door.", "Small room with another door.", "Small room with another door." ],
+          ["2", "Corridor with two other doors.", "Medium size room with another door.", "Medium size room." ],
+          ["3", "Corridor with two other doors.", "Wide room with another door.", "Medium size room." ],
+          ["4", "Corridor with two other doors.", "Wide room with two other doors.", "Wide room." ],
+          ["5", "Corridor with three other doors.", "Large room with two other doors.", "Large room with pillars." ],
+          ["6", "Corridor with three other doors.", "Staircase with a door in the end.", "Staircase with a door in the end." ]
+        ]
+      },
+      "RoomContent": {
+        caption: "Room Content",
+        headers: ["2d6", "Room Content"],
+        rows: [
+          ["2", "Dust-filled library. It may have Secret Passage."],
+          ["3", "Destroyed kitchen with 1d6 coins on the floor."],
+          ["4", "Large table with a few chairs. It may have Secret Passage."],
+          ["5", "Bookshelf with 1d6 Magic Scrolls."],
+          ["6", "Desk with a Chest."],
+          ["7", "Dirt everywhere. It may have Secret Passage."],
+          ["8", "Bed with a Chest on the side."],
+          ["9", "Garden covered by plants. It may have Secret Passage."],
+          ["10", "Trash deposit. It may have Secret Passage."],
+          ["11", "Large table with papers and maps. It may have Secret Passage."],
+          ["12", "Armory. 2d6 Magic Items."]
+        ]
+      },
+      "SecretPassage": {
+        caption: "Secret Passage",
+        headers: ["1d6", "Secret Passage"],
+        rows: [
+          ["1", "You have activated a Trap!"],
+          ["2", "There's nothing here."],
+          ["3", "There's nothing here."],
+          ["4", "You have found a hidden Chest!"],
+          ["5", "You have found a hidden Chest!"],
+          ["6", "A secret door to a Staircase."],
+        ]
+      },
+      "Monsters": {
+        caption: "Monsters",
+        headers: ["2d6", "Monsters"],
+        rows: [
+          ["2", "Minotaur (14 HP; 7 Damage)."],
+          ["3", "2 Orcs (6 HP; 3 Damage; Loot)."],
+          ["4", "1 Orc (6 HP; 3 Damage; Loot)."],
+          ["5", "1d6 Giant Rats (2 HP; 1 Damage)."],
+          ["6", "1d6 Goblins (3 HP; 1 Damage; Explosive)."],
+          ["7-8", "There are no monsters in this room."],
+          ["9", "2 Living Armor (8 HP; 3 Damage)."],
+          ["10", "3 Fungoid (4 HP; 2 Damage; Loot; Regeneration)."],
+          ["11", "Bone Golem (12 HP; 5 Damage; Undead)."],
+          ["12", "Walking Slime (10 HP; 1 Damage; Loot; Regeneration)."]
+        ]
+      },
+      "Trap": {
+        caption: "Trap",
+        headers: ["1d6", "Trap"],
+        rows: [
+          ["1", "A blade falls from the ceiling. Roll the dice. On a '2' you lose one of your arms and on a '1' you die."],
+          ["2", "Acid Spout (5 Damage)."],
+          ["3", "Appears 1d6 Bats (1 HP; 1 Damage; Poison)"],
+          ["4", "You hear a click, but nothing happens."],
+          ["5", "You hear a click, but nothing happens."],
+          ["6", "You hear a click, but nothing happens."],
+        ]
+      },
+      "Reward": {
+        caption: "Reward",
+        headers: ["1d6", "Treasure", "Wonders", "Magic Item"],
+        rows: [
+          ["1", "none"],
+          ["2", "Locked"],
+          ["3", "Locked"],
+          ["4", "Unlocked"],
+          ["5", "Unlocked"],
+          ["6", "Unlocked"],
+        ]
+      },
+      "Boss": {
+        caption: "Boss",
+        headers: ["1d6", "none"],
+        rows: [
+          ["1", "none"],
+          ["2", "Locked"],
+          ["3", "Locked"],
+          ["4", "Unlocked"],
+          ["5", "Unlocked"],
+          ["6", "Unlocked"],
+        ]
+      },
+      "Weapon": {
+        caption: "Weapon",
+        headers: ["1d6", "Weapon"],
+        rows: [
+          ["1", "none"],
+          ["2", "Locked"],
+          ["3", "Locked"],
+          ["4", "Unlocked"],
+          ["5", "Unlocked"],
+          ["6", "Unlocked"],
+        ]
+      },
+      "Armor": {
+        caption: "Armor",
+        headers: ["1d6", "Armor"],
+        rows: [
+          ["1", "none"],
+          ["2", "Locked"],
+          ["3", "Locked"],
+          ["4", "Unlocked"],
+          ["5", "Unlocked"],
+          ["6", "Unlocked"],
+        ]
+      },
+      "Races": {
+        caption: "Races",
+        headers: ["2d6", "Race", "HP", "Ability"],
+        rows: [
+          ["2", "Slimemen", "10", "If you engulf the body of an enemy, you regain all HP."],
+          ["3", "Lightbugster", "16", "You start with 3 uses of the Light spell."],
+          ["4", "Pixie", "8", "You start the game with 5 random Basic Spells."],
+          ["5", "Gnome", "14", "You start the game with 3 random Basic Spells."],
+          ["6", "Elf", "16", "You start the game with 1 random Basic Spell."],
+          ["7", "Human", "20", "None."],
+          ["8", "Dwarf", "18", "When you roll to Find Secret Passages, roll two dice and discard the lowest."],,
+          ["9", "Halfling", "14", "When you roll to Move Silently, roll two dice and discard the lowest. (except in the Boss!)."],
+          ["10", "Cat-Person", "19", "You can sell equipment in the town for twice the price."],
+          ["11", "Rinoceroid", "24", "You can attack with your horn (Damage 1d6)."],
+          ["12", "Dragonkin", "30", "You start with 3 uses of the Fireball spell."],
+          ["x", "Raccoon", "10", "You can evade traps on 1d6 > 4 & steal + 1"],
+          
+        ]
+      },
+      "Class": {
+        caption: "Class",
+        headers: ["2d6", "Class", "HP", "Ability", "Starting Weapon"],
+        rows: [
+          ["2", "Hobo", "+4", "None.", "Wood Stick (1d6-2 damage)"],
+          ["3", "Grave Digger", "+2", "Deal +2 damage to Undead.", "Shovel (1d6-1 damage)"],
+          ["4", "Noble", "+0", "You start the game with 1 random Basic Spell.", "Rapier (1d6+1 damage)"],
+          ["5", "Schoolar", "+0", "You start the game with 3 random Basic Spells.", "Dagger (1d6-1 damage)"],
+          ["6", "Blacksmith", "+4", "You can repair an armor by spending 1 Torch.", "Hammer (1d6 damage)"],
+          ["7", "Guard", "+4", "None.", "Short Sword (1d6 damage)"],
+          ["8", "Cook", "+2", "Gain 1 coin for every monster killed (except Undead)", "Cleaver (1d6 damage)"],
+          ["9", "Locksmith", "+2", "You can open any door without consuming torches", "Dagger ( 1d6-1 damage)"],
+          ["10", "Lumberjack", "+4", "When de destroying doors, roll the dice. On a 6 you get 1 torch.", "Lumberjack Ax (1d6 dmg)"],
+          ["11", "Miner", "+4", "If you run out of torches, you can leave the dungeon.", "Pickaxe (1d6-1 damage)"],
+          ["12", "Gladiator", "+6", "None.", "Short Sword (1d6 damage)"],
+        ]
+      },
+      "Spells": {
+        caption: "Spells",
+        headers: ["1d6", "Spells", "Effect"],
+        rows: [
+          ["0", "-", "-"],
+          ["1", "Heal", "Heals 5 HP."],
+          ["2", "Light", "Creates a globe of light that is worth a torch (but does not use a hand)."],
+          ["3", "Teleport", "You teleport to any empty room. You can use it to escape from combat."],
+          ["4", "Cold Ray", "Deals 4 damage to one monster and it cannot attack next turn."],
+          ["5", "Lightning", "Deals 6 damage to one monster."],
+          ["6", "Fireball", "Deals 5 damage to all monsters in the same room."],
+        ]
+      },
+
+
+
+
+      
+    };
+
+
+
+
+/*
+      "none": {
+        caption: "none",
+        headers: ["1d6", "none"],
+        rows: [
+          ["1", "none"],
+          ["2", "none"],
+          ["3", "none"],
+          ["4", "none"],
+          ["5", "none"],
+          ["6", "none"],
+        ]
+      },
+*/
+
+    function createButtons() {
+      const buttonContainer = document.getElementById('button-container');
+      for (const key in tables) {
+        const button = document.createElement('button');
+        button.textContent = tables[key].caption;
+        button.onclick = () => showTable(key);
+        buttonContainer.appendChild(button);
+      }
+    }
+
+    function showTable(key) {
+      const tableData = tables[key];
+      if (!tableData) return;
+
+      document.getElementById('table-caption').textContent = tableData.caption;
+
+      const headerRow = document.getElementById('table-header');
+      headerRow.innerHTML = '';
+      const headerCells = tableData.headers.map(header => `<th>${header}</th>`).join('');
+      headerRow.innerHTML = `<tr>${headerCells}</tr>`;
+
+      const tableBody = document.getElementById('table-body');
+      tableBody.innerHTML = '';
+      tableData.rows.forEach(row => {
+        const rowHTML = row.map(cell => `<td>${cell}</td>`).join('');
+        tableBody.innerHTML += `<tr>${rowHTML}</tr>`;
+      });
+
+      document.getElementById('table-container').style.display = 'block';
+    }
+
+    function closeTable() {
+      document.getElementById('table-container').style.display = 'none';
+    }
+
+    function rollDice(min, max) {
+      const result = Math.floor(Math.random() * (max - min + 1)) + min;
+      document.getElementById('dice-result').textContent = `You rolled: ${result}`;
+    }
+    createButtons();
+
+
+
+    document.querySelectorAll('.counter').forEach(counter => {
+        const valueElem = counter.querySelector('.value');
+        const minusButton = counter.querySelector('.minus');
+        const plusButton = counter.querySelector('.plus');
+        let count = 0;
+        function updateDisplayStats() {
+            valueElem.textContent = count;
+        }
+        minusButton.addEventListener('click', () => {
+            count--;
+            updateDisplayStats();
+        });
+        plusButton.addEventListener('click', () => {
+            count++;
+            updateDisplayStats();
+        });
+        updateDisplayStats();
+    });
+
+
+
+    const raceSelect    = document.getElementById('race-select');
+    const classesSelect = document.getElementById('classes-select');
+    const spellsSelect  = document.getElementById('spells-select');
+
+    // // Poblar el select box con las razas
+    tables.Races.rows.forEach(row => {
+        const option = document.createElement('option');
+        // Nombre de la raza y HP de la raza ejemplo:  humano [14]
+        option.value = row[1]; 
+        option.textContent = `${row[1]} [${row[2]}]`; 
+        raceSelect.appendChild(option);
+    });
+    tables.Class.rows.forEach(row => {
+        const option = document.createElement('option');
+        option.value = row[1];
+        option.textContent = `${row[1]} [${row[2]}]`; 
+        classesSelect.appendChild(option);
+    });
+    tables.Spells.rows.forEach(row => {
+        const option = document.createElement('option');
+        option.value = row[1];
+        option.textContent = row[1];
+        spellsSelect.appendChild(option);
+    });
+
+
+
+
+
+  </script>
+</body>
+</html>

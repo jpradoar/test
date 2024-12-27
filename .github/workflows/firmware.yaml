@@ -1,0 +1,98 @@
+name: Build and Release Firmware
+
+on:
+  push:
+    paths:
+      - 'esp01/**/source/*.ino'
+      - 'esp8266/**/source/*.ino'
+    branches:
+      - main
+
+jobs:
+  build-firmware:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Set up Arduino CLI
+    - name: Set up Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+      with:
+        version: '0.31.0'
+
+    # Install board dependencies
+    - name: Install Board Dependencies
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install esp8266:esp8266
+        arduino-cli core install esp32:esp32
+
+    # Find modified .ino file and compile
+    - name: Compile Firmware
+      id: compile
+      run: |
+        # Extract the path to the modified .ino file
+        FILE=$(git diff --name-only HEAD^ HEAD | grep 'source/.*\.ino$')
+        if [ -z "$FILE" ]; then
+          echo "No .ino files modified, skipping build."
+          exit 1
+        fi
+
+        # Extract the device and module type from the path
+        DEVICE=$(echo "$FILE" | cut -d '/' -f1)
+        MODULE=$(echo "$FILE" | cut -d '/' -f2)
+        
+        # Set the output file path
+        OUTPUT_DIR="./$DEVICE/$MODULE/firmware"
+        OUTPUT_FILE="$OUTPUT_DIR/$MODULE.bin"
+
+        # Create output directory if it doesn't exist
+        mkdir -p "$OUTPUT_DIR"
+
+        # Compile the .ino file
+        arduino-cli compile --fqbn esp8266:esp8266:generic "$FILE" --output-dir "$OUTPUT_DIR"
+
+        # Pass variables to the next steps
+        echo "file=$FILE" >> $GITHUB_ENV
+        echo "output_file=$OUTPUT_FILE" >> $GITHUB_ENV
+
+    # Commit and push the .bin file
+    - name: Commit Firmware
+      if: success()
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        
+        # Add the .bin file to the repository
+        git add "$OUTPUT_FILE"
+        
+        # Commit with a semantic commit message
+        git commit -m "feat(firmware): add new firmware for ${{ env.file }}"
+        
+        # Push changes to the repository
+        git push
+
+  release:
+    needs: build-firmware
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Set up Node.js for Semantic Release
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    # Install Semantic Release and run it
+    - name: Run Semantic Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        npm install -g semantic-release
+        semantic-release

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      .group-header th {
+        font-size: 200%;
+      }
+      .sub-header th {
+        font-size: 150%;
+      }
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        white-space: nowrap;
+        padding: .3em;
+      }
+      table {
+        margin: 0 auto;
+      }
+      .severity {
+        text-align: center;
+        font-weight: bold;
+        color: #fafafa;
+      }
+      .severity-LOW .severity { background-color: #5fbb31; }
+      .severity-MEDIUM .severity { background-color: #e9c600; }
+      .severity-HIGH .severity { background-color: #ff8800; }
+      .severity-CRITICAL .severity { background-color: #e40000; }
+      .severity-UNKNOWN .severity { background-color: #747474; }
+      .severity-LOW { background-color: #5fbb3160; }
+      .severity-MEDIUM { background-color: #e9c60060; }
+      .severity-HIGH { background-color: #ff880060; }
+      .severity-CRITICAL { background-color: #e4000060; }
+      .severity-UNKNOWN { background-color: #74747460; }
+      table tr td:first-of-type {
+        font-weight: bold;
+      }
+      .links a,
+      .links[data-more-links=on] a {
+        display: block;
+      }
+      .links[data-more-links=off] a:nth-of-type(1n+5) {
+        display: none;
+      }
+      a.toggle-more-links { cursor: pointer; }
+    </style>
+    <title>jpradoar/mqtt-producer:1.1.3 (alpine 3.19.0) - 2025-02-28 17:09:01.82924 +0000 UTC m=+13.820794785 </title>
+    <script>
+      window.onload = function() {
+        document.querySelectorAll('td.links').forEach(function(linkCell) {
+          var links = [].concat.apply([], linkCell.querySelectorAll('a'));
+          [].sort.apply(links, function(a, b) {
+            return a.href > b.href ? 1 : -1;
+          });
+          links.forEach(function(link, idx) {
+            if (links.length > 3 && 3 === idx) {
+              var toggleLink = document.createElement('a');
+              toggleLink.innerText = "Toggle more links";
+              toggleLink.href = "#toggleMore";
+              toggleLink.setAttribute("class", "toggle-more-links");
+              linkCell.appendChild(toggleLink);
+            }
+            linkCell.appendChild(link);
+          });
+        });
+        document.querySelectorAll('a.toggle-more-links').forEach(function(toggleLink) {
+          toggleLink.onclick = function() {
+            var expanded = toggleLink.parentElement.getAttribute("data-more-links");
+            toggleLink.parentElement.setAttribute("data-more-links", "on" === expanded ? "off" : "on");
+            return false;
+          };
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div align="center">
+      <h2>jpradoar/mqtt-producer:1.1.3 (alpine 3.19.0)</h2>
+      <br>
+      <b>Last check: </b> 2025-02-28 17:09:01.82926671 +0000 UTC m=+13.820821495
+    </div>
+    <table>
+      <tr class="group-header"><th colspan="6">alpine</th></tr>
+      <tr class="sub-header">
+        <th>Package</th>
+        <th>Vulnerability ID</th>
+        <th>Severity</th>
+        <th>Installed Version</th>
+        <th>Fixed Version</th>
+        <th>Links</th>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-0760</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-0760">https://access.redhat.com/security/cve/CVE-2024-0760</a>
+          <a href="https://kb.isc.org/docs/cve-2024-0760">https://kb.isc.org/docs/cve-2024-0760</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-0760">https://nvd.nist.gov/vuln/detail/CVE-2024-0760</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0004/">https://security.netapp.com/advisory/ntap-20240731-0004/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-0760">https://www.cve.org/CVERecord?id=CVE-2024-0760</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-11187</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.33-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2025:1676">https://access.redhat.com/errata/RHSA-2025:1676</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-11187">https://access.redhat.com/security/cve/CVE-2024-11187</a>
+          <a href="https://bugzilla.redhat.com/2342879">https://bugzilla.redhat.com/2342879</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2342879">https://bugzilla.redhat.com/show_bug.cgi?id=2342879</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11187">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11187</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2025-1676.html">https://errata.almalinux.org/8/ALSA-2025-1676.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2025:1675">https://errata.rockylinux.org/RLSA-2025:1675</a>
+          <a href="https://kb.isc.org/docs/cve-2024-11187">https://kb.isc.org/docs/cve-2024-11187</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-11187.html">https://linux.oracle.com/cve/CVE-2024-11187.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2025-1681.html">https://linux.oracle.com/errata/ELSA-2025-1681.html</a>
+          <a href="https://lists.debian.org/debian-lts-announce/2025/02/msg00011.html">https://lists.debian.org/debian-lts-announce/2025/02/msg00011.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-11187">https://nvd.nist.gov/vuln/detail/CVE-2024-11187</a>
+          <a href="https://security.netapp.com/advisory/ntap-20250207-0002/">https://security.netapp.com/advisory/ntap-20250207-0002/</a>
+          <a href="https://ubuntu.com/security/notices/USN-7241-1">https://ubuntu.com/security/notices/USN-7241-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-11187">https://www.cve.org/CVERecord?id=CVE-2024-11187</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-12705</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.33-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2025:1670">https://access.redhat.com/errata/RHSA-2025:1670</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-12705">https://access.redhat.com/security/cve/CVE-2024-12705</a>
+          <a href="https://bugzilla.redhat.com/2342879">https://bugzilla.redhat.com/2342879</a>
+          <a href="https://bugzilla.redhat.com/2342880">https://bugzilla.redhat.com/2342880</a>
+          <a href="https://errata.almalinux.org/9/ALSA-2025-1670.html">https://errata.almalinux.org/9/ALSA-2025-1670.html</a>
+          <a href="https://kb.isc.org/docs/cve-2024-12705">https://kb.isc.org/docs/cve-2024-12705</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-12705.html">https://linux.oracle.com/cve/CVE-2024-12705.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2025-1670.html">https://linux.oracle.com/errata/ELSA-2025-1670.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-12705">https://nvd.nist.gov/vuln/detail/CVE-2024-12705</a>
+          <a href="https://security.netapp.com/advisory/ntap-20250207-0003/">https://security.netapp.com/advisory/ntap-20250207-0003/</a>
+          <a href="https://ubuntu.com/security/notices/USN-7241-1">https://ubuntu.com/security/notices/USN-7241-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-12705">https://www.cve.org/CVERecord?id=CVE-2024-12705</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-1737</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5524">https://access.redhat.com/errata/RHSA-2024:5524</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-1737">https://access.redhat.com/security/cve/CVE-2024-1737</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5524.html">https://errata.almalinux.org/8/ALSA-2024-5524.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-1737">https://kb.isc.org/docs/cve-2024-1737</a>
+          <a href="https://kb.isc.org/docs/rrset-limits-in-zones">https://kb.isc.org/docs/rrset-limits-in-zones</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-1737.html">https://linux.oracle.com/cve/CVE-2024-1737.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5930.html">https://linux.oracle.com/errata/ELSA-2024-5930.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-1737">https://nvd.nist.gov/vuln/detail/CVE-2024-1737</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0003/">https://security.netapp.com/advisory/ntap-20240731-0003/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-2">https://ubuntu.com/security/notices/USN-6909-2</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-3">https://ubuntu.com/security/notices/USN-6909-3</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-1737">https://www.cve.org/CVERecord?id=CVE-2024-1737</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-1975</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5524">https://access.redhat.com/errata/RHSA-2024:5524</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-1975">https://access.redhat.com/security/cve/CVE-2024-1975</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5524.html">https://errata.almalinux.org/8/ALSA-2024-5524.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-1975">https://kb.isc.org/docs/cve-2024-1975</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-1975.html">https://linux.oracle.com/cve/CVE-2024-1975.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5930.html">https://linux.oracle.com/errata/ELSA-2024-5930.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-1975">https://nvd.nist.gov/vuln/detail/CVE-2024-1975</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0002/">https://security.netapp.com/advisory/ntap-20240731-0002/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-2">https://ubuntu.com/security/notices/USN-6909-2</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-3">https://ubuntu.com/security/notices/USN-6909-3</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-1975">https://www.cve.org/CVERecord?id=CVE-2024-1975</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-libs</td>
+        <td>CVE-2024-4076</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5390">https://access.redhat.com/errata/RHSA-2024:5390</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-4076">https://access.redhat.com/security/cve/CVE-2024-4076</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/2298904">https://bugzilla.redhat.com/2298904</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5390.html">https://errata.almalinux.org/8/ALSA-2024-5390.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-4076">https://kb.isc.org/docs/cve-2024-4076</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-4076.html">https://linux.oracle.com/cve/CVE-2024-4076.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5390.html">https://linux.oracle.com/errata/ELSA-2024-5390.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-4076">https://nvd.nist.gov/vuln/detail/CVE-2024-4076</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0001/">https://security.netapp.com/advisory/ntap-20240731-0001/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-4076">https://www.cve.org/CVERecord?id=CVE-2024-4076</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-0760</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-0760">https://access.redhat.com/security/cve/CVE-2024-0760</a>
+          <a href="https://kb.isc.org/docs/cve-2024-0760">https://kb.isc.org/docs/cve-2024-0760</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-0760">https://nvd.nist.gov/vuln/detail/CVE-2024-0760</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0004/">https://security.netapp.com/advisory/ntap-20240731-0004/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-0760">https://www.cve.org/CVERecord?id=CVE-2024-0760</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-11187</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.33-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2025:1676">https://access.redhat.com/errata/RHSA-2025:1676</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-11187">https://access.redhat.com/security/cve/CVE-2024-11187</a>
+          <a href="https://bugzilla.redhat.com/2342879">https://bugzilla.redhat.com/2342879</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2342879">https://bugzilla.redhat.com/show_bug.cgi?id=2342879</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11187">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11187</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2025-1676.html">https://errata.almalinux.org/8/ALSA-2025-1676.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2025:1675">https://errata.rockylinux.org/RLSA-2025:1675</a>
+          <a href="https://kb.isc.org/docs/cve-2024-11187">https://kb.isc.org/docs/cve-2024-11187</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-11187.html">https://linux.oracle.com/cve/CVE-2024-11187.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2025-1681.html">https://linux.oracle.com/errata/ELSA-2025-1681.html</a>
+          <a href="https://lists.debian.org/debian-lts-announce/2025/02/msg00011.html">https://lists.debian.org/debian-lts-announce/2025/02/msg00011.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-11187">https://nvd.nist.gov/vuln/detail/CVE-2024-11187</a>
+          <a href="https://security.netapp.com/advisory/ntap-20250207-0002/">https://security.netapp.com/advisory/ntap-20250207-0002/</a>
+          <a href="https://ubuntu.com/security/notices/USN-7241-1">https://ubuntu.com/security/notices/USN-7241-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-11187">https://www.cve.org/CVERecord?id=CVE-2024-11187</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-12705</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.33-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2025:1670">https://access.redhat.com/errata/RHSA-2025:1670</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-12705">https://access.redhat.com/security/cve/CVE-2024-12705</a>
+          <a href="https://bugzilla.redhat.com/2342879">https://bugzilla.redhat.com/2342879</a>
+          <a href="https://bugzilla.redhat.com/2342880">https://bugzilla.redhat.com/2342880</a>
+          <a href="https://errata.almalinux.org/9/ALSA-2025-1670.html">https://errata.almalinux.org/9/ALSA-2025-1670.html</a>
+          <a href="https://kb.isc.org/docs/cve-2024-12705">https://kb.isc.org/docs/cve-2024-12705</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-12705.html">https://linux.oracle.com/cve/CVE-2024-12705.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2025-1670.html">https://linux.oracle.com/errata/ELSA-2025-1670.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-12705">https://nvd.nist.gov/vuln/detail/CVE-2024-12705</a>
+          <a href="https://security.netapp.com/advisory/ntap-20250207-0003/">https://security.netapp.com/advisory/ntap-20250207-0003/</a>
+          <a href="https://ubuntu.com/security/notices/USN-7241-1">https://ubuntu.com/security/notices/USN-7241-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-12705">https://www.cve.org/CVERecord?id=CVE-2024-12705</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-1737</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5524">https://access.redhat.com/errata/RHSA-2024:5524</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-1737">https://access.redhat.com/security/cve/CVE-2024-1737</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5524.html">https://errata.almalinux.org/8/ALSA-2024-5524.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-1737">https://kb.isc.org/docs/cve-2024-1737</a>
+          <a href="https://kb.isc.org/docs/rrset-limits-in-zones">https://kb.isc.org/docs/rrset-limits-in-zones</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-1737.html">https://linux.oracle.com/cve/CVE-2024-1737.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5930.html">https://linux.oracle.com/errata/ELSA-2024-5930.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-1737">https://nvd.nist.gov/vuln/detail/CVE-2024-1737</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0003/">https://security.netapp.com/advisory/ntap-20240731-0003/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-2">https://ubuntu.com/security/notices/USN-6909-2</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-3">https://ubuntu.com/security/notices/USN-6909-3</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-1737">https://www.cve.org/CVERecord?id=CVE-2024-1737</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-1975</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5524">https://access.redhat.com/errata/RHSA-2024:5524</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-1975">https://access.redhat.com/security/cve/CVE-2024-1975</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5524.html">https://errata.almalinux.org/8/ALSA-2024-5524.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-1975">https://kb.isc.org/docs/cve-2024-1975</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-1975.html">https://linux.oracle.com/cve/CVE-2024-1975.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5930.html">https://linux.oracle.com/errata/ELSA-2024-5930.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-1975">https://nvd.nist.gov/vuln/detail/CVE-2024-1975</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0002/">https://security.netapp.com/advisory/ntap-20240731-0002/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-2">https://ubuntu.com/security/notices/USN-6909-2</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-3">https://ubuntu.com/security/notices/USN-6909-3</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-1975">https://www.cve.org/CVERecord?id=CVE-2024-1975</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">bind-tools</td>
+        <td>CVE-2024-4076</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">9.18.24-r1</td>
+        <td>9.18.31-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/23/1">http://www.openwall.com/lists/oss-security/2024/07/23/1</a>
+          <a href="http://www.openwall.com/lists/oss-security/2024/07/31/2">http://www.openwall.com/lists/oss-security/2024/07/31/2</a>
+          <a href="https://access.redhat.com/errata/RHSA-2024:5390">https://access.redhat.com/errata/RHSA-2024:5390</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-4076">https://access.redhat.com/security/cve/CVE-2024-4076</a>
+          <a href="https://bugzilla.redhat.com/2298893">https://bugzilla.redhat.com/2298893</a>
+          <a href="https://bugzilla.redhat.com/2298901">https://bugzilla.redhat.com/2298901</a>
+          <a href="https://bugzilla.redhat.com/2298904">https://bugzilla.redhat.com/2298904</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298893">https://bugzilla.redhat.com/show_bug.cgi?id=2298893</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298901">https://bugzilla.redhat.com/show_bug.cgi?id=2298901</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2298904">https://bugzilla.redhat.com/show_bug.cgi?id=2298904</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1737</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1975</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4076</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-5390.html">https://errata.almalinux.org/8/ALSA-2024-5390.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:5231">https://errata.rockylinux.org/RLSA-2024:5231</a>
+          <a href="https://kb.isc.org/docs/cve-2024-4076">https://kb.isc.org/docs/cve-2024-4076</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-4076.html">https://linux.oracle.com/cve/CVE-2024-4076.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-5390.html">https://linux.oracle.com/errata/ELSA-2024-5390.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-4076">https://nvd.nist.gov/vuln/detail/CVE-2024-4076</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240731-0001/">https://security.netapp.com/advisory/ntap-20240731-0001/</a>
+          <a href="https://ubuntu.com/security/notices/USN-6909-1">https://ubuntu.com/security/notices/USN-6909-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-4076">https://www.cve.org/CVERecord?id=CVE-2024-4076</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">pyc</td>
+        <td>CVE-2024-9287</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">3.11.10-r0</td>
+        <td>3.11.11-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:10980">https://access.redhat.com/errata/RHSA-2024:10980</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-9287">https://access.redhat.com/security/cve/CVE-2024-9287</a>
+          <a href="https://bugzilla.redhat.com/2321440">https://bugzilla.redhat.com/2321440</a>
+          <a href="https://bugzilla.redhat.com/2330804">https://bugzilla.redhat.com/2330804</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2321440">https://bugzilla.redhat.com/show_bug.cgi?id=2321440</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2325776">https://bugzilla.redhat.com/show_bug.cgi?id=2325776</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-10980.html">https://errata.almalinux.org/8/ALSA-2024-10980.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:10779">https://errata.rockylinux.org/RLSA-2024:10779</a>
+          <a href="https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7">https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7</a>
+          <a href="https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db">https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db</a>
+          <a href="https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8">https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8</a>
+          <a href="https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97">https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97</a>
+          <a href="https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b">https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b</a>
+          <a href="https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483">https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483</a>
+          <a href="https://github.com/python/cpython/issues/124651">https://github.com/python/cpython/issues/124651</a>
+          <a href="https://github.com/python/cpython/pull/124712">https://github.com/python/cpython/pull/124712</a>
+          <a href="https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0">https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-9287.html">https://linux.oracle.com/cve/CVE-2024-9287.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-11111.html">https://linux.oracle.com/errata/ELSA-2024-11111.html</a>
+          <a href="https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/">https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-9287">https://nvd.nist.gov/vuln/detail/CVE-2024-9287</a>
+          <a href="https://ubuntu.com/security/notices/USN-7116-1">https://ubuntu.com/security/notices/USN-7116-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-9287">https://www.cve.org/CVERecord?id=CVE-2024-9287</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">python3</td>
+        <td>CVE-2024-9287</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">3.11.10-r0</td>
+        <td>3.11.11-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:10980">https://access.redhat.com/errata/RHSA-2024:10980</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-9287">https://access.redhat.com/security/cve/CVE-2024-9287</a>
+          <a href="https://bugzilla.redhat.com/2321440">https://bugzilla.redhat.com/2321440</a>
+          <a href="https://bugzilla.redhat.com/2330804">https://bugzilla.redhat.com/2330804</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2321440">https://bugzilla.redhat.com/show_bug.cgi?id=2321440</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2325776">https://bugzilla.redhat.com/show_bug.cgi?id=2325776</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-10980.html">https://errata.almalinux.org/8/ALSA-2024-10980.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:10779">https://errata.rockylinux.org/RLSA-2024:10779</a>
+          <a href="https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7">https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7</a>
+          <a href="https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db">https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db</a>
+          <a href="https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8">https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8</a>
+          <a href="https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97">https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97</a>
+          <a href="https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b">https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b</a>
+          <a href="https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483">https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483</a>
+          <a href="https://github.com/python/cpython/issues/124651">https://github.com/python/cpython/issues/124651</a>
+          <a href="https://github.com/python/cpython/pull/124712">https://github.com/python/cpython/pull/124712</a>
+          <a href="https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0">https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-9287.html">https://linux.oracle.com/cve/CVE-2024-9287.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-11111.html">https://linux.oracle.com/errata/ELSA-2024-11111.html</a>
+          <a href="https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/">https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-9287">https://nvd.nist.gov/vuln/detail/CVE-2024-9287</a>
+          <a href="https://ubuntu.com/security/notices/USN-7116-1">https://ubuntu.com/security/notices/USN-7116-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-9287">https://www.cve.org/CVERecord?id=CVE-2024-9287</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">python3-pyc</td>
+        <td>CVE-2024-9287</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">3.11.10-r0</td>
+        <td>3.11.11-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:10980">https://access.redhat.com/errata/RHSA-2024:10980</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-9287">https://access.redhat.com/security/cve/CVE-2024-9287</a>
+          <a href="https://bugzilla.redhat.com/2321440">https://bugzilla.redhat.com/2321440</a>
+          <a href="https://bugzilla.redhat.com/2330804">https://bugzilla.redhat.com/2330804</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2321440">https://bugzilla.redhat.com/show_bug.cgi?id=2321440</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2325776">https://bugzilla.redhat.com/show_bug.cgi?id=2325776</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-10980.html">https://errata.almalinux.org/8/ALSA-2024-10980.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:10779">https://errata.rockylinux.org/RLSA-2024:10779</a>
+          <a href="https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7">https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7</a>
+          <a href="https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db">https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db</a>
+          <a href="https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8">https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8</a>
+          <a href="https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97">https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97</a>
+          <a href="https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b">https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b</a>
+          <a href="https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483">https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483</a>
+          <a href="https://github.com/python/cpython/issues/124651">https://github.com/python/cpython/issues/124651</a>
+          <a href="https://github.com/python/cpython/pull/124712">https://github.com/python/cpython/pull/124712</a>
+          <a href="https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0">https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-9287.html">https://linux.oracle.com/cve/CVE-2024-9287.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-11111.html">https://linux.oracle.com/errata/ELSA-2024-11111.html</a>
+          <a href="https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/">https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-9287">https://nvd.nist.gov/vuln/detail/CVE-2024-9287</a>
+          <a href="https://ubuntu.com/security/notices/USN-7116-1">https://ubuntu.com/security/notices/USN-7116-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-9287">https://www.cve.org/CVERecord?id=CVE-2024-9287</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">python3-pycache-pyc0</td>
+        <td>CVE-2024-9287</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">3.11.10-r0</td>
+        <td>3.11.11-r0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:10980">https://access.redhat.com/errata/RHSA-2024:10980</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-9287">https://access.redhat.com/security/cve/CVE-2024-9287</a>
+          <a href="https://bugzilla.redhat.com/2321440">https://bugzilla.redhat.com/2321440</a>
+          <a href="https://bugzilla.redhat.com/2330804">https://bugzilla.redhat.com/2330804</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2321440">https://bugzilla.redhat.com/show_bug.cgi?id=2321440</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2325776">https://bugzilla.redhat.com/show_bug.cgi?id=2325776</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11168</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9287</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-10980.html">https://errata.almalinux.org/8/ALSA-2024-10980.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:10779">https://errata.rockylinux.org/RLSA-2024:10779</a>
+          <a href="https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7">https://github.com/python/cpython/commit/633555735a023d3e4d92ba31da35b1205f9ecbd7</a>
+          <a href="https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db">https://github.com/python/cpython/commit/8450b2482586857d689b6658f08de9c8179af7db</a>
+          <a href="https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8">https://github.com/python/cpython/commit/9286ab3a107ea41bd3f3c3682ce2512692bdded8</a>
+          <a href="https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97">https://github.com/python/cpython/commit/ae961ae94bf19c8f8c7fbea3d1c25cc55ce8ae97</a>
+          <a href="https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b">https://github.com/python/cpython/commit/d48cc82ed25e26b02eb97c6263d95dcaa1e9111b</a>
+          <a href="https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483">https://github.com/python/cpython/commit/e52095a0c1005a87eed2276af7a1f2f66e2b6483</a>
+          <a href="https://github.com/python/cpython/issues/124651">https://github.com/python/cpython/issues/124651</a>
+          <a href="https://github.com/python/cpython/pull/124712">https://github.com/python/cpython/pull/124712</a>
+          <a href="https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0">https://github.com/python/cpython/pull/124712/commits/b6a3bbd155c558cdcda482629073e492437db3d0</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-9287.html">https://linux.oracle.com/cve/CVE-2024-9287.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-11111.html">https://linux.oracle.com/errata/ELSA-2024-11111.html</a>
+          <a href="https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/">https://mail.python.org/archives/list/security-announce@python.org/thread/RSPJ2B5JL22FG3TKUJ7D7DQ4N5JRRBZL/</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-9287">https://nvd.nist.gov/vuln/detail/CVE-2024-9287</a>
+          <a href="https://ubuntu.com/security/notices/USN-7116-1">https://ubuntu.com/security/notices/USN-7116-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-9287">https://www.cve.org/CVERecord?id=CVE-2024-9287</a>
+        </td>
+      </tr>
+      <tr><th colspan="6">No Misconfigurations found</th></tr>
+      <tr class="group-header"><th colspan="6">python-pkg</th></tr>
+      <tr class="sub-header">
+        <th>Package</th>
+        <th>Vulnerability ID</th>
+        <th>Severity</th>
+        <th>Installed Version</th>
+        <th>Fixed Version</th>
+        <th>Links</th>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">setuptools</td>
+        <td>CVE-2022-40897</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">65.5.0</td>
+        <td>65.5.1</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:2987">https://access.redhat.com/errata/RHSA-2024:2987</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2022-40897">https://access.redhat.com/security/cve/CVE-2022-40897</a>
+          <a href="https://bugzilla.redhat.com/2158559">https://bugzilla.redhat.com/2158559</a>
+          <a href="https://bugzilla.redhat.com/2240059">https://bugzilla.redhat.com/2240059</a>
+          <a href="https://bugzilla.redhat.com/2242493">https://bugzilla.redhat.com/2242493</a>
+          <a href="https://bugzilla.redhat.com/2249755">https://bugzilla.redhat.com/2249755</a>
+          <a href="https://bugzilla.redhat.com/2257854">https://bugzilla.redhat.com/2257854</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2158559">https://bugzilla.redhat.com/show_bug.cgi?id=2158559</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40897">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40897</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-2987.html">https://errata.almalinux.org/8/ALSA-2024-2987.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2023:0952">https://errata.rockylinux.org/RLSA-2023:0952</a>
+          <a href="https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2022-43012.yaml">https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2022-43012.yaml</a>
+          <a href="https://github.com/pypa/setuptools">https://github.com/pypa/setuptools</a>
+          <a href="https://github.com/pypa/setuptools/blob/fe8a98e696241487ba6ac9f91faa38ade939ec5d/setuptools/package_index.py#L200">https://github.com/pypa/setuptools/blob/fe8a98e696241487ba6ac9f91faa38ade939ec5d/setuptools/package_index.py#L200</a>
+          <a href="https://github.com/pypa/setuptools/commit/43a9c9bfa6aa626ec2a22540bea28d2ca77964be">https://github.com/pypa/setuptools/commit/43a9c9bfa6aa626ec2a22540bea28d2ca77964be</a>
+          <a href="https://github.com/pypa/setuptools/compare/v65.5.0...v65.5.1">https://github.com/pypa/setuptools/compare/v65.5.0...v65.5.1</a>
+          <a href="https://github.com/pypa/setuptools/issues/3659">https://github.com/pypa/setuptools/issues/3659</a>
+          <a href="https://linux.oracle.com/cve/CVE-2022-40897.html">https://linux.oracle.com/cve/CVE-2022-40897.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-2987.html">https://linux.oracle.com/errata/ELSA-2024-2987.html</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R">https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R/">https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R/</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H">https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H/">https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H/</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R">https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R</a>
+          <a href="https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H">https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-40897">https://nvd.nist.gov/vuln/detail/CVE-2022-40897</a>
+          <a href="https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages">https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages</a>
+          <a href="https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/">https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/</a>
+          <a href="https://pyup.io/vulnerabilities/CVE-2022-40897/52495">https://pyup.io/vulnerabilities/CVE-2022-40897/52495</a>
+          <a href="https://pyup.io/vulnerabilities/CVE-2022-40897/52495/">https://pyup.io/vulnerabilities/CVE-2022-40897/52495/</a>
+          <a href="https://security.netapp.com/advisory/ntap-20230214-0001">https://security.netapp.com/advisory/ntap-20230214-0001</a>
+          <a href="https://security.netapp.com/advisory/ntap-20230214-0001/">https://security.netapp.com/advisory/ntap-20230214-0001/</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240621-0006">https://security.netapp.com/advisory/ntap-20240621-0006</a>
+          <a href="https://security.netapp.com/advisory/ntap-20240621-0006/">https://security.netapp.com/advisory/ntap-20240621-0006/</a>
+          <a href="https://setuptools.pypa.io/en/latest">https://setuptools.pypa.io/en/latest</a>
+          <a href="https://ubuntu.com/security/notices/USN-5817-1">https://ubuntu.com/security/notices/USN-5817-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2022-40897">https://www.cve.org/CVERecord?id=CVE-2022-40897</a>
+        </td>
+      </tr>
+      <tr class="severity-HIGH">
+        <td class="pkg-name">setuptools</td>
+        <td>CVE-2024-6345</td>
+        <td class="severity">HIGH</td>
+        <td class="pkg-version">65.5.0</td>
+        <td>70.0.0</td>
+        <td class="links" data-more-links="off">
+          <a href="https://access.redhat.com/errata/RHSA-2024:6311">https://access.redhat.com/errata/RHSA-2024:6311</a>
+          <a href="https://access.redhat.com/security/cve/CVE-2024-6345">https://access.redhat.com/security/cve/CVE-2024-6345</a>
+          <a href="https://bugzilla.redhat.com/2292788">https://bugzilla.redhat.com/2292788</a>
+          <a href="https://bugzilla.redhat.com/2297771">https://bugzilla.redhat.com/2297771</a>
+          <a href="https://bugzilla.redhat.com/show_bug.cgi?id=2297771">https://bugzilla.redhat.com/show_bug.cgi?id=2297771</a>
+          <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6345">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6345</a>
+          <a href="https://errata.almalinux.org/8/ALSA-2024-6311.html">https://errata.almalinux.org/8/ALSA-2024-6311.html</a>
+          <a href="https://errata.rockylinux.org/RLSA-2024:6726">https://errata.rockylinux.org/RLSA-2024:6726</a>
+          <a href="https://github.com/pypa/setuptools">https://github.com/pypa/setuptools</a>
+          <a href="https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0">https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0</a>
+          <a href="https://github.com/pypa/setuptools/pull/4332">https://github.com/pypa/setuptools/pull/4332</a>
+          <a href="https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5">https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5</a>
+          <a href="https://linux.oracle.com/cve/CVE-2024-6345.html">https://linux.oracle.com/cve/CVE-2024-6345.html</a>
+          <a href="https://linux.oracle.com/errata/ELSA-2024-6726.html">https://linux.oracle.com/errata/ELSA-2024-6726.html</a>
+          <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-6345">https://nvd.nist.gov/vuln/detail/CVE-2024-6345</a>
+          <a href="https://ubuntu.com/security/notices/USN-7002-1">https://ubuntu.com/security/notices/USN-7002-1</a>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2024-6345">https://www.cve.org/CVERecord?id=CVE-2024-6345</a>
+        </td>
+      </tr>
+      <tr><th colspan="6">No Misconfigurations found</th></tr>
+      <tr class="group-header"><th colspan="6"></th></tr>
+      <tr><th colspan="6">No Vulnerabilities found</th></tr>
+      <tr><th colspan="6">No Misconfigurations found</th></tr>
+      <tr class="group-header"><th colspan="6"></th></tr>
+      <tr><th colspan="6">No Vulnerabilities found</th></tr>
+      <tr><th colspan="6">No Misconfigurations found</th></tr>
+      <tr class="group-header"><th colspan="6"></th></tr>
+      <tr><th colspan="6">No Vulnerabilities found</th></tr>
+      <tr><th colspan="6">No Misconfigurations found</th></tr>
+    </table>
+  </body>
+</html>

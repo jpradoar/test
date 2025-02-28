@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - disabled
-      #- main
+      - main
 
 
 env:
@@ -15,7 +15,7 @@ env:
   COMMITER_NAME: 'AutoCommit'
   VULN_SEVERITY: 'CRITICAL,HIGH'
   VULN_TYPE: 'os,library'
-  VULN_FORMAT: 'table' 
+  VULN_FORMAT: 'template' 
   VULN_TIMEOUT_SCAN: '2m0s'
   VULN_SCANNERS: 'vuln,secret,misconfig,license'
   VULN_IGNORED_LIC: 'MIT' # MIT,LGPL,MPL-2.0
@@ -68,6 +68,7 @@ jobs:
       id: trivy_scan
       continue-on-error: true
       run: |
+        wget -N https://raw.githubusercontent.com/jpradoar/event-driven-architecture/refs/heads/main/vuln_scans/html.tpl
         rm -rf ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table
         trivy image \
          --scanners ${{ env.VULN_SCANNERS }} \
@@ -76,7 +77,8 @@ jobs:
          --pkg-types ${{ env.VULN_TYPE }} \
          --license-full \
          --ignored-licenses ${{ env.VULN_IGNORED_LIC }} \
-         --format ${{ env.VULN_FORMAT }} \
+         --format template --template \
+         --template "@html.tpl"  \
          --exit-code ${{ env.VULN_EXIT_CODE }} \
          --db-repository ${{ env.TRIVY_REPOSITORY }} \
          --ignore-unfixed \

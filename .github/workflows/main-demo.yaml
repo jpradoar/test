@@ -100,7 +100,7 @@ jobs:
       run: |
         echo "### See detailed vuln scan in: "  > /tmp/vuln_info.md
         echo "<br>  ![](https://custom-icon-badges.demolab.com/badge/Vulnerability-detected-red.svg)  <br>" >> /tmp/vuln_info.md
-        echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/vuln_scans/${{ env.REPO_APP }}_vuln_scan.html)"  >> /tmp/vuln_info.md
+        echo " * Vulnerability report: [vuln_scans/${{ env.REPO_APP }}_vuln_scan](https://jpradoar.github.io/test/vuln_scans/${{ env.REPO_APP }}_vuln_scan.html)"  >> /tmp/vuln_info.md
         echo " * Vulnerability detected in commit: ${{ github.sha }}"  >> /tmp/vuln_info.md
 
     - name: Upload vuln scan report 

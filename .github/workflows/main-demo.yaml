@@ -68,8 +68,8 @@ jobs:
       id: trivy_scan
       continue-on-error: true
       run: |
-        wget -N https://raw.githubusercontent.com/jpradoar/event-driven-architecture/refs/heads/main/vuln_scans/html.tpl
-        rm -rf ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table
+        wget -N https://raw.githubusercontent.com/jpradoar/event-driven-architecture/refs/heads/main/vuln_scans/html.tpl; 
+        rm -rf ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.table; 
         trivy image \
          --scanners ${{ env.VULN_SCANNERS }} \
          --severity ${{ env.VULN_SEVERITY }} \
@@ -77,7 +77,7 @@ jobs:
          --pkg-types ${{ env.VULN_TYPE }} \
          --license-full \
          --ignored-licenses ${{ env.VULN_IGNORED_LIC }} \
-         --format template --template \
+         --format template \
          --template "@html.tpl"  \
          --exit-code ${{ env.VULN_EXIT_CODE }} \
          --db-repository ${{ env.TRIVY_REPOSITORY }} \

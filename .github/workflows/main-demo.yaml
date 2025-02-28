@@ -85,6 +85,10 @@ jobs:
          -o ./vuln_scans/${{ env.REPO_APP }}_vuln_scan.html \
         jpradoar/mqtt-producer:1.1.3
 
+    - name: test 
+      if: ${{ steps.trivy_scan.outcome == 'failure' }}
+      run: |
+        ls -lha
 
     - name: show vulnerability report
       if: ${{ steps.trivy_scan.outcome == 'failure' }}

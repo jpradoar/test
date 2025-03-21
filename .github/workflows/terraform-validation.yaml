@@ -39,8 +39,6 @@ jobs:
         aws --endpoint-url=$AWS_ENDPOINT_URL s3 mb s3://super-duper-bucket
         aws --endpoint-url=$AWS_ENDPOINT_URL s3 ls
 
-
-
     - name: Terraform fmt
       id: fmt
       continue-on-error: true
@@ -54,88 +52,22 @@ jobs:
       id: validate
       run: terraform -chdir=terraform/ validate -no-color
 
-
     - name: Terraform make a test
       run: |
         terraform -chdir=terraform/ test
-
 
     - name: Run terraform vuln scan
       continue-on-error: true
       run: |
         docker run --rm -v $GITHUB_WORKSPACE/terraform:/data  tenable/terrascan scan -t aws --find-vuln -d /data
 
-
     - name: Terraform Plan
       id: plan
       run: terraform -chdir=terraform/ plan -no-color -input=false
       
-
-
-    - uses: actions/github-script@v7
-      if: github.event_name == 'pull_request'
-      env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          // 1. Retrieve existing bot comments for the PR
-          const { data: comments } = await github.rest.issues.listComments({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.issue.number,
-          })
-          const botComment = comments.find(comment => {
-            return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
-          })
-
-          // 2. Prepare format of the comment
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-          <details><summary>Validation Output</summary>
-
-          \`\`\`\n
-          ${{ steps.validate.outputs.stdout }}
-          \`\`\`
-
-          </details>
-
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-
-          <details><summary>Show Plan</summary>
-
-          \`\`\`\n
-          ${process.env.PLAN}
-          \`\`\`
-
-          </details>
-
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
-          // 3. If we have a comment, update it, otherwise create a new one
-          if (botComment) {
-            github.rest.issues.updateComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              comment_id: botComment.id,
-              body: output
-            })
-          } else {
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-          }
-
-
-
     - name: Backup original provider.tf
       run: |
         cp -rp ./terraform/provider.tf ./terraform/provider.tf_bkp
-
 
     - name: create fake provider.tf
       run: |
@@ -183,7 +115,39 @@ jobs:
         }
         EOF
 
-
     - name: Terraform apply 
       run: |
-        terraform -chdir=terraform/ apply --auto-approve 
+        terraform -chdir=terraform/ apply --auto-approve
+
+    - name: remove .terraform files
+      run: |
+        rm -rf ./terraform/.terraform* ./terraform/terraform.tfstate*
+
+
+    - name: Configure Git
+      if: success()
+      run: |
+        git config --global user.name "(PR) AutoCommit"
+        git config --global user.email "github-actions@github.com"
+
+    - name: Create new branch
+      if: success()
+      run: |
+        git checkout -b terraform-changes
+
+    - name: Commit and Push changes
+      if: success()
+      run: |
+        git add --all
+        git commit -m "Automated changes after Terraform apply" || echo "No changes to commit"
+        git push origin terraform-changes || echo "Branch already exists"
+
+    - name: Create Pull Request
+      if: success()
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: terraform-changes
+        base: main
+        title: "Automated Terraform Changes"
+        body: "This PR contains changes generated automatically after Terraform apply successfully."

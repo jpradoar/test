@@ -7,7 +7,6 @@ on:
       - 'terraform/**'
       - '.github/workflows/terraform-validation.yaml'
 
-
 jobs:
   tf-validation:
     runs-on: ubuntu-latest 

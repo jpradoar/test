@@ -27,9 +27,22 @@ jobs:
           sudo apt-get install docker-compose -y 
 
 
-    - name: Run localstack
+
+    - name: Run docker compose (local-stack
+      uses: hoverkraft-tech/compose-action@v2.0.1
+      with:
+        compose-file: "./docker-compose.yml"
+
+
+    - name: Test localstack
       run: |
-        docker-compose up -d 
+        export AWS_ACCESS_KEY_ID=test
+        export AWS_SECRET_ACCESS_KEY=test
+        export AWS_DEFAULT_REGION=us-east-1
+        export AWS_ENDPOINT_URL=http://localhost:4566
+        aws --endpoint-url=$AWS_ENDPOINT_URL s3 mb s3://super-duper-bucket
+        aws --endpoint-url=$AWS_ENDPOINT_URL s3 ls
+
 
 
     - name: Terraform fmt
@@ -53,7 +66,7 @@ jobs:
 
     - name: Run terraform vuln scan
       run: |
-        docker run --rm -it -v $PWD/:/data  tenable/terrascan scan -t aws --find-vuln -d /data
+        docker run --rm -it -v $PWD/terraform:/data  tenable/terrascan scan -t aws --find-vuln -d /data
 
 
     - name: Terraform Plan

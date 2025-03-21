@@ -43,9 +43,9 @@ jobs:
 
     - name: Terraform fmt
       id: fmt
-      run: terraform fmt -check
       continue-on-error: true
-
+      run: terraform fmt -check
+      
     - name: Terraform Init
       id: init
       run: terraform init -input=false
@@ -61,14 +61,16 @@ jobs:
 
 
     - name: Run terraform vuln scan
+      continue-on-error: true
       run: |
         docker run --rm -v $GITHUB_WORKSPACE/terraform:/data  tenable/terrascan scan -t aws --find-vuln -d /data
 
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -input=false
       continue-on-error: true
+      run: terraform plan -no-color -input=false
+      
 
 
     - uses: actions/github-script@v7

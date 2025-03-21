@@ -62,7 +62,7 @@ jobs:
 
     - name: Run terraform vuln scan
       run: |
-        docker run --rm -it -v $PWD/terraform:/data  tenable/terrascan scan -t aws --find-vuln -d /data
+        docker run --rm -it -v $GITHUB_WORKSPACE/terraform:/data  tenable/terrascan scan -t aws --find-vuln -d /data
 
 
     - name: Terraform Plan

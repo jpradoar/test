@@ -134,12 +134,12 @@ jobs:
 
     - name: Backup original provider.tf
       run: |
-        cp -rp provider.tf provider.tf_bkp
+        cp -rp ./terraform/provider.tf ./terraform/provider.tf_bkp
 
 
     - name: create fake provider.tf
       run: |
-        cat <<EOF > provider.tf
+        cat <<EOF > ./terraform/provider.tf
         terraform {
           required_providers {
             aws = {
@@ -187,8 +187,3 @@ jobs:
     - name: Terraform apply 
       run: |
         terraform -chdir=terraform/ apply --auto-approve 
-
-
-    - name: Restore original provider.tf
-      run: |
-        mv provider.tf_bkp provider.tf

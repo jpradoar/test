@@ -121,7 +121,11 @@ jobs:
 
     - name: remove .terraform files
       run: |
-        rm -rf ./terraform/.terraform* ./terraform/terraform.tfstate*
+        rm -rf ./terraform/.terraform* ./terraform/terraform.tfstate* ./terraform/.terraform.lock.hcl
+
+    - name: Restore original provider.tf
+      run: |
+        mv ./terraform/provider.tf_bkp ./terraform/provider.tf 
 
 
     - name: Configure Git

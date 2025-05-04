@@ -1,10 +1,15 @@
 {
 	"Titulo": "🃏 Cartas",
 		"CartasPoker": [
-	              "[♦] Diamante","[♥] Corazon","[♣️] Trebol","[♠] Pica"
+	              "[♦] A Diamante",
+	              "[♦] 2 Diamante",
+	              "[♦] 3 Diamante",
+
 		],
 		"CartasEspanolas": [
-	              "[🏆] COpa","[🗡️] Espada","[🪙] Oro","[🪵] Basto"
-		]
-	
+	              "[🏆] Copa",
+	              "[🗡️] Espada",
+	              "[🪙] Oro",
+	              "[🪵] Basto"
+		]	
 }

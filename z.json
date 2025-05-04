@@ -1,0 +1,14 @@
+{
+	"Titulo": "🃏 Cartas",
+		"CartasPoker": [
+	              "[♦] A Diamante",
+	              "[♦] 2 Diamante",
+	              "[♦] 3 Diamante"
+		],
+		"CartasEspanolas": [
+	              "[🏆] Copa",
+	              "[🗡️] Espada",
+	              "[🪙] Oro",
+	              "[🪵] Basto"
+		]	
+}

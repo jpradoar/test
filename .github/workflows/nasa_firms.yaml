@@ -1,0 +1,46 @@
+name: Actualizar incendios NASA FIRMS
+
+on:
+  #schedule:
+  #  - cron: '0 */6 * * *'  # Cada 6 horas
+  workflow_dispatch:
+
+env:
+  MIN_LAT: 35.9
+  MAX_LAT: 43.8
+  MIN_LON: -9.3
+  MAX_LON: 3.3
+  CSV_URL: https://firms.modaps.eosdis.nasa.gov/active_fire/c6.1/csv/MODIS_C6_1_Europe_24h.csv
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Ejecutar script
+        run: |
+          python scripts/update_fires_firms.py \
+            ${{ env.MIN_LAT }} \
+            ${{ env.MAX_LAT }} \
+            ${{ env.MIN_LON }} \
+            ${{ env.MAX_LON }} \
+            ${{ env.CSV_URL }}
+
+      - name: Commit y push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data/incendios.json
+          git commit -m "🔥 Incendios actualizados desde NASA FIRMS - $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "Sin cambios"
+          git push

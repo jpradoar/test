@@ -4,6 +4,27 @@ on:
   #schedule:
   #  - cron: '0 */6 * * *'  # Cada 6 horas
   workflow_dispatch:
+    inputs:
+      min_lat:
+        description: "Latitud mínima"
+        required: false
+        default: "35.9"
+      max_lat:
+        description: "Latitud máxima"
+        required: false
+        default: "43.8"
+      min_lon:
+        description: "Longitud mínima"
+        required: false
+        default: "-9.3"
+      max_lon:
+        description: "Longitud máxima"
+        required: false
+        default: "3.3"
+      csv_url:
+        description: "URL CSV de NASA FIRMS"
+        required: false
+        default: "https://firms.modaps.eosdis.nasa.gov/active_fire/c6.1/csv/MODIS_C6_1_Europe_24h.csv"
 
 env:
   MIN_LAT: 35.9

@@ -1,4 +1,4 @@
-name: Actualizar incendios NASA FIRMS
+name: NASA_FIRMS
 
 on:
   #schedule:
